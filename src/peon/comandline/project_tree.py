@@ -3,6 +3,9 @@ import os
 
 class ProjectTree:
 
+    # TODO: вынести это проверкой в отдельный класс и вообще забирать из конфига
+    EXCLUDE_FOLDERS = ['build', 'venv']
+
     def __init__(
             self,
             path_to_project: str,
@@ -14,8 +17,8 @@ class ProjectTree:
         project_abs_path = os.path.abspath(self.path_to_project)
 
         # if only single file
-        if '.py' in self.path_to_project:
-            return [os.path.join(project_abs_path, self.path_to_project)]
+        if len(self.path_to_project) > 2 and self.path_to_project[-3:] == '.py':
+            return [project_abs_path]
 
         list_Of_files = os.listdir(project_abs_path)
         allFiles = list()
@@ -34,4 +37,13 @@ class ProjectTree:
                 if file_extension == 'py':
                     allFiles.append(fullPath)
 
-        return allFiles
+        files_to_check = []
+        for path in allFiles:
+            if 'venv' in path:
+                continue
+            elif 'build' in path:
+                continue
+            else:
+                files_to_check.append(path)
+
+        return files_to_check

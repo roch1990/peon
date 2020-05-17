@@ -1,4 +1,5 @@
 import argparse
+import sys
 
 from peon.comandline.project_tree import ProjectTree
 from peon.lint.lint import Lint
@@ -16,10 +17,12 @@ class CommandLine:
             type=str,
             nargs='?',
             help='path to your project or single file',
+            default='./'
         )
 
     def parse_input(self):
         args = self.parser.parse_args()
+        print(args, file=sys.stderr)
 
         if args.path_to_project:
             project_tree = ProjectTree(args.path_to_project)
