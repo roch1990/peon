@@ -2,20 +2,20 @@
 
 # PEON
 
- "Python Elegant Objects Naive" linter allows you to check your code for conditions of 
- "[Elegant objects](https://www.elegantobjects.org/)" OOP architecture, 
+ "Python Elegant Objects Naive" linter allows you to check your code for conditions of
+ "[Elegant objects](https://www.elegantobjects.org/)" OOP architecture,
  proposed by [yegor256](https://github.com/yegor256)
- 
+
  This repo work only for python code.
- 
- # Why naive? 
- 
+
+ # Why naive?
+
  Becase this linter is simple line-by-line file reader.
- 
+
  "Open file -> Check line -> Next Line -> Check Line -> Close File -> Open File...etc"
- 
+
  # What eo principles i can check?
- 
+
  | Priciple| Yes/No|
  | ------------- |:------------------:|
  | No null       | :heavy_check_mark:    |
@@ -28,15 +28,15 @@
  | No statements in test methods except assertThat | :heavy_minus_sign:  |
  | No ORM or ActiveRecord | :x:  |
  | No implementation inheritance | :heavy_check_mark: |
- 
+
  :heavy_check_mark: - realized
- 
+
  :interrobang: - so-so (not sure)
- 
+
  :heavy_minus_sign: - not done yet
- 
+
  :x: - will never be done, i think
- 
+
 # Use-cases
 
 Simply you should run something like this
@@ -44,7 +44,7 @@ Simply you should run something like this
 ```bash
 peon ./src
 ```
- 
+
 # Add linter to pre-commit hooks
 
 You can use this linter by adding it to [pre-commit](https://pre-commit.com/) configuration file.
@@ -60,4 +60,3 @@ For example:
         args:
           - ./src/peon
 ```
-

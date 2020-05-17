@@ -5,15 +5,19 @@ class ProjectTree:
 
     def __init__(
             self,
-            path_to_project: str
+            path_to_project: str,
     ):
         self.path_to_project = path_to_project
 
     def inspect(self) -> list:
 
         project_abs_path = os.path.abspath(self.path_to_project)
+
+        # if only single file
+        if '.py' in self.path_to_project:
+            return [os.path.join(project_abs_path, self.path_to_project)]
+
         list_Of_files = os.listdir(project_abs_path)
-        # print(list_Of_files)
         allFiles = list()
 
         # Iterate over all the entries

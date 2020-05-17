@@ -6,7 +6,7 @@ class Lint:
 
     def __init__(
             self,
-            files: tuple
+            files: tuple,
     ):
         self.files = files
 

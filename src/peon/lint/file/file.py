@@ -17,7 +17,3 @@ class File:
         self.func_statement: typing.Tuple[Line] = Statements(text=self.body, statement=Statements.FUNC_STATEMENT).check()  # peon: exclude
         self.class_statement: typing.Tuple[Line] = Statements(text=self.body, statement=Statements.CLASS_STATEMENT).check()  # peon: exclude
         self.lines: typing.Tuple[Line] = Statements(text=self.body, statement=Statements.ALL_LINES).check()  # peon: exclude
-
-
-
-

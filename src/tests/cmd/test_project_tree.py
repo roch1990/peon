@@ -6,12 +6,12 @@ from tests.utils import TestProjectTree
 
 def test_inspect_success():
     assert ProjectTree(
-        path_to_project=f"{TestProjectTree().pythonpath}/tests/fixtures"
+        path_to_project=f'{TestProjectTree().pythonpath}/tests/fixtures',
     ).inspect() == [
                f'{TestProjectTree().pythonpath}/tests/fixtures/dummy_code.py',
                f'{TestProjectTree().pythonpath}/tests/fixtures/__init__.py',
                f'{TestProjectTree().pythonpath}/tests/fixtures/dummy_folder/__init__.py',
-           ]
+    ]
 
 
 def test_inspect_type_error():

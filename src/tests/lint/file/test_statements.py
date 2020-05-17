@@ -44,4 +44,3 @@ def test_none_statement():
 def test_none_file_check():
     with pytest.raises(TypeError):
         assert Statements(statement='class', text=None).check()[0].raw_line == 'class Abstracter:'
-

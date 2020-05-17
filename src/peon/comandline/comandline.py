@@ -15,15 +15,17 @@ class CommandLine:
             metavar='PATH',
             type=str,
             nargs='?',
-            help='path to your project'
+            help='path to your project or single file',
         )
 
     def parse_input(self):
         args = self.parser.parse_args()
 
         if args.path_to_project:
+
+            if args.path_to_project[:-2] == 'py':
+                Lint([args.path]).project()
+
             project_tree = ProjectTree(args.path_to_project)
             files = project_tree.inspect()
             Lint(files).project()
-
-
