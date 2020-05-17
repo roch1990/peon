@@ -23,4 +23,3 @@ class Lint:
                 principles.no_instanceof_or_type_casting_or_reflection()
                 principles.no_static_methods_and_not_even_private_ones()
                 principles.no_inheritance()
-

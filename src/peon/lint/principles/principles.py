@@ -33,7 +33,7 @@ class Principle:
         constructor = []
 
         for statement in self.file_object.lines:
-            if not constructor and 'def __init__' not in statement.raw_line:
+            if not constructor and 'def __init__(' not in statement.raw_line:
                 continue
             if constructor and 'def' in statement.raw_line:
                 break
@@ -71,7 +71,7 @@ class Principle:
         constructor = []
 
         for statement in self.file_object.lines:
-            if not constructor and 'def __init__' not in statement.raw_line:
+            if not constructor and 'def __init__(' not in statement.raw_line:
                 continue
             if constructor and 'def' in statement.raw_line:
                 break
@@ -104,7 +104,7 @@ class Principle:
 
     def no_static_methods_and_not_even_private_ones(self):
         for statement in self.file_object.lines:
-            if '@staticmethod(' in statement.raw_line:
+            if '@staticmethod(' in statement.raw_line:  # peon: exclude
                 Report(
                     text=f'{self.file_object.name} [line:{statement.line_number}]\n'
                     f"'{statement.raw_line.lstrip(' ')[:-1]}'\n"
@@ -120,7 +120,7 @@ class Principle:
 
     def no_instanceof_or_type_casting_or_reflection(self):
         for statement in self.file_object.lines:
-            if 'instanceof(' in statement.raw_line or 'type(' in statement.raw_line:
+            if 'instanceof(' in statement.raw_line or 'type(' in statement.raw_line:  # peon: exclude
                 Report(
                     text=f'{self.file_object.name} [line:{statement.line_number}]\n'
                     f"'{statement.raw_line.lstrip(' ')[:-1]}'\n"

@@ -14,6 +14,15 @@ class ProjectTree:
 
     def inspect(self) -> list:
 
+        if isinstance(self.path_to_project, list):
+            files_to_check = []
+
+            for file in self.path_to_project:
+                if file[-3:] != '.py':
+                    continue
+                files_to_check.append(os.path.abspath(file))
+            return files_to_check
+
         project_abs_path = os.path.abspath(self.path_to_project)
 
         # if only single file
