@@ -1,0 +1,55 @@
+exclude: (?x)(^venv/)
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v2.5.0
+    hooks:
+      - id: check-docstring-first
+        stages:
+          - commit
+          - push
+      - id: check-merge-conflict
+        stages:
+          - push
+      - id: double-quote-string-fixer
+        stages:
+          - commit
+          - push
+      - id: flake8
+        stages:
+          - commit
+          - push
+        args:
+          - --max-line-length=120
+      - id: trailing-whitespace
+        stages:
+          - commit
+          - push
+      - id: end-of-file-fixer
+        stages:
+          - commit
+          - push
+  - repo: https://github.com/pre-commit/mirrors-autopep8
+    rev: v1.5.2
+    hooks:
+      - id: autopep8
+        stages:
+          - commit
+          - push
+        args:
+          - --max-line-length=120
+          - --diff
+  - repo: https://github.com/asottile/add-trailing-comma
+    rev: v2.0.1
+    hooks:
+      - id: add-trailing-comma
+        stages:
+          - commit
+          - push
+#  - repo: https://github.com/roch1990/peon
+#    rev: master
+#    hooks:
+#      - id: peon
+#        stages:
+#          - commit
+#        args:
+#          - ./src/peon
