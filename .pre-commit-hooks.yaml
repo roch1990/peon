@@ -1,4 +1,4 @@
--   id: python "Elegant Object" naive linter
+-   id: peon
     name: Python "Elegant Object" Naive linter.
     description: This hook check your code for "Elegant Object" principles (proposed by yegor256)
     entry: python-eo-linter

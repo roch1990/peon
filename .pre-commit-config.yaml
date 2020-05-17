@@ -1,7 +1,7 @@
 exclude: (?x)(^venv/)
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v2.5.0
+    rev: v3.0.1
     hooks:
       - id: check-docstring-first
         stages:
@@ -14,12 +14,6 @@ repos:
         stages:
           - commit
           - push
-      - id: flake8
-        stages:
-          - commit
-          - push
-        args:
-          - --max-line-length=120
       - id: trailing-whitespace
         stages:
           - commit
@@ -46,7 +40,7 @@ repos:
           - commit
           - push
 #  - repo: https://github.com/roch1990/peon
-#    rev: master
+#    rev: v0.2
 #    hooks:
 #      - id: peon
 #        stages:
