@@ -22,10 +22,6 @@ class CommandLine:
         args = self.parser.parse_args()
 
         if args.path_to_project:
-
-            if args.path_to_project[:-2] == 'py':
-                Lint([args.path]).project()
-
             project_tree = ProjectTree(args.path_to_project)
             files = project_tree.inspect()
             Lint(files).project()

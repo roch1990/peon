@@ -4,3 +4,4 @@
     entry: peon
     language: python
     types: [file, python]
+    pass_filenames: false
