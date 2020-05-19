@@ -1,6 +1,7 @@
 import re
 
 from peon.lint.file.file import File
+from peon.lint.file.function_def.function import FunctionParseResult
 from peon.lint.report.report import Report
 from peon.lint.principles.links import PrincipleLink
 
@@ -15,19 +16,22 @@ class Principle:
             self,
             file_object: File,
             output_channel: str,
+            returned_expression: object,
+            static_decorator: bool,
     ):
         self.file_object = file_object
         self.output_channel = output_channel
+        self.returned_expression = returned_expression
+        self.static_decorator = static_decorator
 
-    def no_null(self):
-        for statement in self.file_object.return_statement:
-            for word in statement.words:
-                if word in Principle.NON_RETURN_CASES:
-                    Report(
-                        text=f'{self.file_object.name} [line:{statement.line_number}]\n'
-                        f"'{' '.join(statement.words)}'\n"
-                        f'commentary: No null rule {PrincipleLink.NO_NULL}\n',
-                    ).to_stdout()
+    def no_null(self, line_number):
+        check_result: FunctionParseResult = self.returned_expression
+
+        if not check_result.return_not_none:
+            Report(
+                text=f'{self.file_object.path_to_file} [line:{line_number}]\n'
+                f'commentary: No null rule {PrincipleLink.NO_NULL}\n',
+            ).to_stdout()
 
     def no_code_in_constructors(self):
         constructor = []
@@ -102,21 +106,12 @@ class Principle:
                         f"commentary: No 'er'/'ers' and etc endings {PrincipleLink.NO_ENDINGS}\n",
                     ).to_stdout()
 
-    def no_static_methods_and_not_even_private_ones(self):
-        for statement in self.file_object.lines:
-            if '@staticmethod(' in statement.raw_line:  # peon: exclude
-                Report(
-                    text=f'{self.file_object.name} [line:{statement.line_number}]\n'
-                    f"'{statement.raw_line.lstrip(' ')[:-1]}'\n"
-                    f'commentary: No staticmethods {PrincipleLink.NO_PRIVATE_METHODS}\n',
-                ).to_stdout()
-
-            if 'def _' in statement.raw_line and '__(' not in statement.raw_line:
-                Report(
-                    text=f'{self.file_object.name} [line:{statement.line_number}]\n'
-                    f"'{statement.raw_line.lstrip(' ')[:-1]}'\n"
-                    f'commentary: No private methods {PrincipleLink.NO_PRIVATE_METHODS}\n',
-                ).to_stdout()
+    def no_static_methods_and_not_even_private_ones(self, line_number):
+        if self.static_decorator:
+            Report(
+                text=f'{self.file_object.path_to_file} [line:{line_number}]\n'
+                f'commentary: No static methods or even private ones {PrincipleLink.NO_STATIC_METHODS}\n',
+            ).to_stdout()
 
     def no_instanceof_or_type_casting_or_reflection(self):
         for statement in self.file_object.lines:
