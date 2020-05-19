@@ -1,5 +1,7 @@
 ![](https://www.meme-arsenal.com/memes/4310e01cdd1fbad0ef9a7b48bfe8fdca.jpg)
 
+# In development now
+
 # PEON
 
  "Python Elegant Objects Naive" linter allows you to check your code for conditions of
@@ -8,26 +10,26 @@
 
  This repo work only for python code.
 
+
  # Why naive?
 
- Becase this linter is simple line-by-line file reader.
+ Becase this linter is simple ast-nodes reader.
 
- "Open file -> Check line -> Next Line -> Check Line -> Close File -> Open File...etc"
 
  # What eo principles i can check?
 
  | Priciple| Yes/No|
  | ------------- |:------------------:|
- | No null       | :heavy_check_mark:    |
- | No code in constructors     | :interrobang: |
- | No mutable objects | :heavy_check_mark:         |
- | No readers, parsers, controllers, sorters, and so on | :heavy_check_mark:         |
- | No static methods, not even private ones | :heavy_check_mark:         |
- | No instanceof, type casting, or reflection | :heavy_check_mark:         |
+ | No null       | :interrobang:    |
+ | No code in constructors     | :heavy_minus_sign: |
+ | No mutable objects | :heavy_minus_sign:         |
+ | No readers, parsers, controllers, sorters, and so on | :heavy_minus_sign:         |
+ | No static methods, not even private ones | :heavy_minus_sign:         |
+ | No instanceof, type casting, or reflection | :heavy_minus_sign:         |
  | No public methods without a contract | :x:         |
  | No statements in test methods except assertThat | :heavy_minus_sign:  |
  | No ORM or ActiveRecord | :x:  |
- | No implementation inheritance | :heavy_check_mark: |
+ | No implementation inheritance | :heavy_minus_sign: |
 
  :heavy_check_mark: - realized
 

@@ -1,4 +1,6 @@
+from peon.lint.file.analyze import InternalFileStruct
 from peon.lint.file.file import File
+from peon.lint.file.function_def.function import Function
 from peon.lint.principles.principles import Principle
 
 
@@ -13,13 +15,24 @@ class Lint:
     def project(self):
 
         for file in self.files:
-            with open(file, 'r') as py_file:
-                file_body = tuple(py_file.readlines())
-                file_object = File(body=file_body, name=file)
-                principles = Principle(file_object=file_object, output_channel='stdout')
+
+            print(f'check {file}')
+
+            file = File(file)
+            analyze = InternalFileStruct(file)
+            analyze.check()
+
+            # check for plain functions
+            if analyze.func_definitions is None:
+                continue
+
+            for func in analyze.func_definitions:
+
+                returned = func.returned_value()
+                principles = Principle(
+                    file_object=file,
+                    line_number='0',
+                    check_result=returned,
+                    output_channel='stdout',
+                )
                 principles.no_null()
-                principles.no_mutable_objects()
-                principles.no_code_in_constructors()
-                principles.no_instanceof_or_type_casting_or_reflection()
-                principles.no_static_methods_and_not_even_private_ones()
-                principles.no_inheritance()

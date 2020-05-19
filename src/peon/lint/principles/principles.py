@@ -1,6 +1,7 @@
 import re
 
 from peon.lint.file.file import File
+from peon.lint.file.function_def.function import FunctionParseResult
 from peon.lint.report.report import Report
 from peon.lint.principles.links import PrincipleLink
 
@@ -14,20 +15,23 @@ class Principle:
     def __init__(
             self,
             file_object: File,
+            line_number: str,
             output_channel: str,
+            check_result: object,
     ):
         self.file_object = file_object
+        self.line_number = line_number
         self.output_channel = output_channel
+        self.check_result = check_result
 
     def no_null(self):
-        for statement in self.file_object.return_statement:
-            for word in statement.words:
-                if word in Principle.NON_RETURN_CASES:
-                    Report(
-                        text=f'{self.file_object.name} [line:{statement.line_number}]\n'
-                        f"'{' '.join(statement.words)}'\n"
-                        f'commentary: No null rule {PrincipleLink.NO_NULL}\n',
-                    ).to_stdout()
+        check_result: FunctionParseResult = self.check_result
+
+        if not check_result.return_not_none:
+            Report(
+                text=f'{self.file_object.path_to_file} [line:{check_result.line_number}]\n'
+                f'commentary: No null rule {PrincipleLink.NO_NULL}\n',
+            ).to_stdout()
 
     def no_code_in_constructors(self):
         constructor = []

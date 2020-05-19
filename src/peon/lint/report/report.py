@@ -10,7 +10,6 @@ class Report:
 
     def to_stdout(self):
         print(self.text, file=sys.stderr)
-        exit(1)
 
     def to_file(self):
         pass
