@@ -1,3 +1,5 @@
+import ast
+
 import _ast
 
 
@@ -31,6 +33,9 @@ class ReturnedExpression:
         # string object
         elif isinstance(item.value, _ast.Str):
             return bool(item.value.s)
+
+        elif isinstance(item.value, _ast.JoinedStr):
+            return bool(item.value.values)
 
         # None object and ... dunno what
         elif isinstance(item.value, _ast.NameConstant):

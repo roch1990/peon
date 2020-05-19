@@ -35,6 +35,12 @@ class Function:
 
         node = self.definition
 
+        if isinstance(node, _ast.Assign):
+            return FunctionParseResult(
+                return_not_none=bool(Function.EMPTY_RETURNED_VALUE),
+                line_number=node.lineno,
+            )
+
         for item in node.body:
             if isinstance(item, _ast.Return):
                 return FunctionParseResult(
@@ -46,9 +52,18 @@ class Function:
             line_number=node.lineno,
         )
 
-    def static(self):
+    def static_or_private(self):
+        if isinstance(self.definition, _ast.Assign):
+            return False
+
         decorators = self.definition.decorator_list
         for item in decorators:
             if item.id == 'staticmethod':
                 return True
+        if self.definition.name.startswith('_') or self.definition.name.startswith('__'):
+            if not self.definition.name.endswith('__'):
+                return True
         return False
+
+    def name(self):
+        return self.definition.name
