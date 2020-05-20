@@ -29,7 +29,7 @@
  | No public methods without a contract | :x:         |
  | No statements in test methods except assertThat | :heavy_minus_sign:  |
  | No ORM or ActiveRecord | :x:  |
- | No implementation inheritance | :heavy_minus_sign: |
+ | No implementation inheritance | :heavy_check_mark: |
 
  :heavy_check_mark: - realized
 

@@ -50,7 +50,8 @@ class Lint:
                     static_decorator=False,
                     class_meta=cls,
                 )
-                principles.no_readers_parsers_or_controllers_or_sorters_and_so_on()
+                principles.no_readers_parsers_or_controllers_or_sorters_and_so_on(cls.definition.lineno)
+                principles.no_inheritance(cls.definition.lineno)
 
     def lint_function_list(self, function_list: List[Function], file: File):
 

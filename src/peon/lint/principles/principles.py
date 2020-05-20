@@ -44,13 +44,13 @@ class Principle:
     def no_mutable_objects(self):
         pass
 
-    def no_readers_parsers_or_controllers_or_sorters_and_so_on(self):
+    def no_readers_parsers_or_controllers_or_sorters_and_so_on(self, line_number):
         if self.class_meta.name.endswith('er') or \
                 self.class_meta.name.endswith('or') or \
                 self.class_meta.name.endswith('ers') or \
                 self.class_meta.name.endswith('ors'):
             Report(
-                text=f'{self.file_object.path_to_file} [line:{self.class_meta.definition.lineno}]\n'
+                text=f'{self.file_object.path_to_file} [line:{line_number}]\n'
                 f"commentary: No 'er'/'ers' and etc endings {PrincipleLink.NO_ENDINGS}\n",
             ).to_stdout()
 
@@ -73,5 +73,9 @@ class Principle:
     def no_orm(self):
         pass
 
-    def no_inheritance(self):
-        pass
+    def no_inheritance(self, line_number):
+        if self.class_meta.inherited():
+            Report(
+                text=f'{self.file_object.path_to_file} [line:{line_number}]\n'
+                f'commentary: No inheritance {PrincipleLink.NO_INHERITANCE}\n',
+            ).to_stdout()
