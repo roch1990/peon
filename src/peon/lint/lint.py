@@ -2,7 +2,7 @@ from typing import List
 
 from peon.lint.file.analyze import InternalFileStruct
 from peon.lint.file.file import File
-from peon.lint.file.function_def.function import Function
+from peon.lint.file.function_def.function import Function, FunctionParseResult
 from peon.lint.principles.principles import Principle
 
 
@@ -65,3 +65,4 @@ class Lint:
             )
             principles.no_null(func.returned_value().line_number)
             principles.no_static_methods_and_not_even_private_ones(func.definition.lineno)
+            principles.no_instanceof_or_type_casting_or_reflection(func.reflection_at_line())

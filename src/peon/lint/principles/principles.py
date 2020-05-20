@@ -61,8 +61,12 @@ class Principle:
                 f'commentary: No static methods or even private ones {PrincipleLink.NO_STATIC_METHODS}\n',
             ).to_stdout()
 
-    def no_instanceof_or_type_casting_or_reflection(self):
-        pass
+    def no_instanceof_or_type_casting_or_reflection(self, line_numbers):
+        for line_number in line_numbers:
+            Report(
+                text=f'{self.file_object.path_to_file} [line:{line_number}]\n'
+                f'commentary: No isinstance or reflection {PrincipleLink.NO_REFLECTION}\n',
+            ).to_stdout()
 
     def no_public_methods_without_a_contract_interface(self):
         pass

@@ -1,3 +1,5 @@
+import ast
+
 import _ast
 
 from peon.lint.file.function_def.expression.returned_expr import ReturnedExpression
@@ -20,6 +22,7 @@ class Function:
     """
 
     EMPTY_RETURNED_VALUE = True
+    PYTHON_REFLECTION_EXPRESSIONS = ['type', 'isinstance']
 
     def __init__(
             self,
@@ -74,3 +77,14 @@ class Function:
 
     def name(self):
         return self.definition.name
+
+    def reflection_at_line(self):
+
+        reflection_list = []
+        for node in ast.walk(self.definition):
+            try:
+                if node.id in self.PYTHON_REFLECTION_EXPRESSIONS:
+                    reflection_list.append(node.lineno)
+            except:
+                continue
+        return reflection_list
