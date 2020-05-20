@@ -66,3 +66,4 @@ class Lint:
             principles.no_null(func.returned_value().line_number)
             principles.no_static_methods_and_not_even_private_ones(func.definition.lineno)
             principles.no_instanceof_or_type_casting_or_reflection(func.reflection_at_line())
+            principles.no_code_in_constructors(func.constructor_non_attribs_value_line_number())

@@ -88,3 +88,21 @@ class Function:
             except:
                 continue
         return reflection_list
+
+    def constructor_non_attribs_value_line_number(self):
+
+        line_numbers = []
+        if not isinstance(self.definition, _ast.FunctionDef):
+            return line_numbers
+
+        if self.definition.name == '__init__':
+            for expressions in self.definition.body:
+                if not isinstance(expressions, _ast.Assign):
+                    line_numbers.append(expressions.lineno)
+                    continue
+
+                for target in expressions.targets:
+                    if not isinstance(target, _ast.Attribute):
+                        line_numbers.append(target.lineno)
+
+        return line_numbers

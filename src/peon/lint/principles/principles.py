@@ -35,8 +35,12 @@ class Principle:
                 f'commentary: No null rule {PrincipleLink.NO_NULL}\n',
             ).to_stdout()
 
-    def no_code_in_constructors(self):
-        pass
+    def no_code_in_constructors(self, line_numbers):
+        for line_number in line_numbers:
+            Report(
+                text=f'{self.file_object.path_to_file} [line:{line_number}]\n'
+                f'commentary: No code in constructor {PrincipleLink.NO_CODE_IN_CONSTRUCTORS}\n',
+            ).to_stdout()
 
     def no_getters_and_setters(self):
         pass
