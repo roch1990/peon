@@ -1,3 +1,5 @@
+import ast
+
 import _ast
 
 from peon.lint.file.function_def.expression.returned_expr import ReturnedExpression
@@ -20,6 +22,7 @@ class Function:
     """
 
     EMPTY_RETURNED_VALUE = True
+    PYTHON_REFLECTION_EXPRESSIONS = ['type', 'isinstance']
 
     def __init__(
             self,
@@ -40,6 +43,11 @@ class Function:
                 return_not_none=bool(Function.EMPTY_RETURNED_VALUE),
                 line_number=node.lineno,
             )
+        elif isinstance(node, _ast.Pass):
+            return FunctionParseResult(
+                return_not_none=bool(Function.EMPTY_RETURNED_VALUE),
+                line_number=node.lineno,
+            )
 
         for item in node.body:
             if isinstance(item, _ast.Return):
@@ -55,6 +63,8 @@ class Function:
     def static_or_private(self):
         if isinstance(self.definition, _ast.Assign):
             return False
+        elif isinstance(self.definition, _ast.Pass):
+            return False
 
         decorators = self.definition.decorator_list
         for item in decorators:
@@ -67,3 +77,14 @@ class Function:
 
     def name(self):
         return self.definition.name
+
+    def reflection_at_line(self):
+
+        reflection_list = []
+        for node in ast.walk(self.definition):
+            try:
+                if node.id in self.PYTHON_REFLECTION_EXPRESSIONS:
+                    reflection_list.append(node.lineno)
+            except:
+                continue
+        return reflection_list

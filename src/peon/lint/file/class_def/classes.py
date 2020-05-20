@@ -16,6 +16,7 @@ class Class:
         self.definition = definition
         self.name = definition.name
         self.functions = self.definition.body
+        self.base_classes = definition.bases
 
     def constructor(self) -> Optional[Function]:
         for func in self.functions:
@@ -34,3 +35,8 @@ class Class:
         for func in self.functions:
             converted_methods.append(Function(func))
         return converted_methods
+
+    def inherited(self) -> bool:
+        if len(self.base_classes) > 0:
+            return True
+        return False
