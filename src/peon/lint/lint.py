@@ -43,6 +43,15 @@ class Lint:
                     file=file,
                 )
 
+                principles = Principle(
+                    file_object=file,
+                    output_channel='stdout',
+                    returned_expression=None,
+                    static_decorator=False,
+                    class_meta=cls,
+                )
+                principles.no_readers_parsers_or_controllers_or_sorters_and_so_on()
+
     def lint_function_list(self, function_list: List[Function], file: File):
 
         for func in function_list:
@@ -51,6 +60,7 @@ class Lint:
                 output_channel='stdout',
                 returned_expression=func.returned_value(),
                 static_decorator=func.static_or_private(),
+                class_meta=None,
             )
             principles.no_null(func.returned_value().line_number)
             principles.no_static_methods_and_not_even_private_ones(func.definition.lineno)

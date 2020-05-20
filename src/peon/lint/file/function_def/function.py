@@ -40,6 +40,11 @@ class Function:
                 return_not_none=bool(Function.EMPTY_RETURNED_VALUE),
                 line_number=node.lineno,
             )
+        elif isinstance(node, _ast.Pass):
+            return FunctionParseResult(
+                return_not_none=bool(Function.EMPTY_RETURNED_VALUE),
+                line_number=node.lineno,
+            )
 
         for item in node.body:
             if isinstance(item, _ast.Return):
@@ -54,6 +59,8 @@ class Function:
 
     def static_or_private(self):
         if isinstance(self.definition, _ast.Assign):
+            return False
+        elif isinstance(self.definition, _ast.Pass):
             return False
 
         decorators = self.definition.decorator_list
