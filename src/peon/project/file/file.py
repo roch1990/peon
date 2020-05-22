@@ -4,9 +4,8 @@ class File:
         self.path_to_file = path_to_file
 
     def check_extension(self):
-        if not self.path_to_file.endswith('.py'):
-            return False
-        return True
+        file_extension_is_py = self.path_to_file.endswith('.py')
+        return file_extension_is_py
 
     def open(self):
         try:

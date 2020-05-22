@@ -60,15 +60,15 @@ def test_constructor_class_without_constructor():
 
 
 def test_method_names_only_constructor():
-    assert Class(ConstructorFixture.constructor_without_params).method_names() == ['__init__']
+    assert Class(ConstructorFixture.constructor_without_params).method_names() == ('__init__',)
 
 
 def test_method_names_constructor_with_additional_method():
-    assert Class(ConstructorFixture.class_with_constructor_and_additional_method).method_names() == ['some_function', '__init__']
+    assert Class(ConstructorFixture.class_with_constructor_and_additional_method).method_names() == ('some_function', '__init__')
 
 
 def test_method_names_empty_class():
-    assert Class(ConstructorFixture.empty_class).method_names() == []
+    assert Class(ConstructorFixture.empty_class).method_names() == ()
 
 
 def test_converted_methods_constructor_with_additional_method():
