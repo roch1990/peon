@@ -22,7 +22,7 @@
  | ------------- |:------------------:|
  | No null       | :heavy_check_mark:    |
  | No code in constructors     | :heavy_check_mark: |
- | No getters and setters     | :heavy_minus: |
+ | No getters and setters     | :heavy_check_mark: |
  | No mutable objects | :heavy_check_mark:         |
  | No readers, parsers, controllers, sorters, and so on | :heavy_check_mark:         |
  | No static methods, not even private ones | :heavy_check_mark:         |

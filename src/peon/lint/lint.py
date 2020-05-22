@@ -69,3 +69,5 @@ class Lint:
             principles.no_code_in_constructors(func.constructor_non_attribs_value_line_number())
             principles.no_statements_in_test_methods_except_assert(func.non_assert_methods_at_test_function())
             principles.no_mutable_objects(func.constructor_mutable_attribs_line_number())
+            principles.no_getters_and_setters(func.set_encapsulated_attribs_line_numbers())
+            principles.no_getters_and_setters(func.setter_or_getters_def_names_line_numbers())

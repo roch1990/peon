@@ -144,3 +144,33 @@ class Function:
                         line_numbers.append(expressions.lineno)
 
         return line_numbers
+
+    def set_encapsulated_attribs_line_numbers(self):
+
+        line_numbers = []
+        if not isinstance(self.definition, _ast.FunctionDef):
+            return line_numbers
+
+        if self.definition.name != '__init__':
+
+            for expressions in self.definition.body:
+                if isinstance(expressions, _ast.Assign):
+                    for target in expressions.targets:
+                        # check for keyword 'self'
+                        try:
+                            value = target.value.value.id
+                            if value == 'self':
+                                line_numbers.append(target.lineno)
+                        except AttributeError:
+                            continue
+        return line_numbers
+
+    def setter_or_getters_def_names_line_numbers(self):
+
+        line_numbers = []
+        if not isinstance(self.definition, _ast.FunctionDef):
+            return line_numbers
+
+        if self.definition.name.startswith('set') or self.definition.name.startswith('get'):
+            line_numbers.append(self.definition.lineno)
+        return line_numbers
