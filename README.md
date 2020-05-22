@@ -1,5 +1,10 @@
 [![Build Status](https://travis-ci.org/roch1990/peon.svg?branch=master)](https://travis-ci.org/roch1990/peon)
 [![codecov](https://codecov.io/gh/roch1990/peon/branch/master/graph/badge.svg)](https://codecov.io/gh/roch1990/peon)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=roch1990_peon&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=roch1990_peon)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=roch1990_peon&metric=alert_status)](https://sonarcloud.io/dashboard?id=roch1990_peon)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=roch1990_peon&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=roch1990_peon)
+[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=roch1990_peon&metric=sqale_index)](https://sonarcloud.io/dashboard?id=roch1990_peon)
+[![Hits-of-Code](https://hitsofcode.com/github/roch1990/peon)](https://hitsofcode.com/view/github/roch1990/peon)
 
 ![](https://www.meme-arsenal.com/memes/4310e01cdd1fbad0ef9a7b48bfe8fdca.jpg)
 
@@ -12,46 +17,6 @@
  proposed by [yegor256](https://github.com/yegor256)
 
  This repo work only for python code.
-
-
- # Why naive?
-
- Becase it check only "plain definitions".
-
- For example:
-
- - good, linter check that:
- ```python
-def some_function(some_arg):
-    some_var = some_arg
-
-```
-
-- bad, linter skip that (definition inside definiton - discourage and decrease code quality):
- ```python
-def some_function(some_arg):
-    def some_another_function(some_arg):
-        return some_arg
-    some_var = some_another_function(some_arg)
-
-```
-
-- good, linter check that:
- ```python
-class SomeClass:
-    pass
-
-```
-
-- bad, linter skip that (definition inside definiton - discourage and decrease code quality):
- ```python
-class SomeClass:
-    class SomeAnotherClass:
-        pass
-    pass
-
-```
-
 
  # What eo principles i can check?
 
@@ -99,4 +64,64 @@ For example:
           - commit
         args:
           - ./src/peon
+```
+
+ # Why naive?
+
+ Becase it check only "plain definitions".
+
+ For example:
+
+ - good, linter check that:
+ ```python
+def some_function(some_arg):
+    some_var = some_arg
+
+```
+
+- bad, linter skip that (definition inside definiton - discourage and decrease code quality):
+ ```python
+def some_function(some_arg):
+    def some_another_function(some_arg):
+        return some_arg
+    some_var = some_another_function(some_arg)
+
+```
+
+- good, linter check that:
+ ```python
+class SomeClass:
+    pass
+
+```
+
+- bad, linter skip that (definition inside definiton - discourage and decrease code quality):
+ ```python
+class SomeClass:
+    class SomeAnotherClass:
+        pass
+    pass
+
+```
+
+# Testing this library
+
+It is simple:
+
+```bash
+make tests
+```
+
+this instruction starts both tests - unit and mutual.
+
+Show results of mutual tests:
+
+```bash
+mutmut results
+```
+
+Show result of concrete mutual test:
+
+```bash
+mutmut show <test_id:int>
 ```

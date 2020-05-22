@@ -1,4 +1,5 @@
 import ast
+from typing import Tuple
 
 import _ast
 
@@ -18,7 +19,7 @@ class FunctionParseResult:
 
 class Function:
     """
-    class for function processing
+    Class for handling in-code inspected methods definitions
     """
 
     EMPTY_RETURNED_VALUE = True
@@ -34,74 +35,110 @@ class Function:
     def returned_value(self) -> FunctionParseResult:
         """
         return value of function "return" expression
-        :return:
+        :return: FunctionParseResult object
         """
 
         node = self.definition
+        # if function does not has body
+        if not node:
+            return FunctionParseResult(
+                return_not_none=bool(Function.EMPTY_RETURNED_VALUE),
+                line_number=node.lineno,
+            )
 
+        # skip plain assignment expressions
         if isinstance(node, _ast.Assign):
             return FunctionParseResult(
                 return_not_none=bool(Function.EMPTY_RETURNED_VALUE),
                 line_number=node.lineno,
             )
+        # skip plain pass expressions
         elif isinstance(node, _ast.Pass):
             return FunctionParseResult(
                 return_not_none=bool(Function.EMPTY_RETURNED_VALUE),
                 line_number=node.lineno,
             )
+        # skip for any other plain expressions
         elif isinstance(node, _ast.Expr):
             return FunctionParseResult(
                 return_not_none=bool(Function.EMPTY_RETURNED_VALUE),
                 line_number=node.lineno,
             )
-
+        # iterate over function body
         for item in node.body:
+            # check, that expression has return type
             if isinstance(item, _ast.Return):
                 return FunctionParseResult(
                     return_not_none=ReturnedExpression(item).value_not_none(),
                     line_number=item.lineno,
                 )
+        # in any other case - return empty
         return FunctionParseResult(
             return_not_none=bool(Function.EMPTY_RETURNED_VALUE),
             line_number=node.lineno,
         )
 
-    def static_or_private(self):
+    def static_or_private(self) -> bool:
+        """
+        Check method for 'static' or 'private' statements
+        :return: bool
+        """
+        # skip plain assignments
         if isinstance(self.definition, _ast.Assign):
             return False
+        # skip plain pass expressions
         elif isinstance(self.definition, _ast.Pass):
             return False
+        # skip plain expressions
         elif isinstance(self.definition, _ast.Expr):
             return False
 
+        # get list of method decorators
         decorators = self.definition.decorator_list
+        # iterate over decorators
         for item in decorators:
+            # if 'staticmethod' in decorator list
             if item.id == 'staticmethod':
                 return True
+        # check for '_' and '__' starts chars
         if self.definition.name.startswith('_') or self.definition.name.startswith('__'):
+            # skip magic methods
             if not self.definition.name.endswith('__'):
                 return True
         return False
 
-    def name(self):
+    def name(self) -> str:
+        """
+        Strange method for fun. Yes, looks like a getter.
+        :return:
+        """
         return self.definition.name
 
-    def reflection_at_line(self):
-
+    def reflection_at_line(self) -> Tuple[int]:
+        """
+        Check method for 'isinstance' and 'type' expressions
+        :return: list of line numbers, where was found that expressions
+        """
         reflection_list = []
+        # iterate over all subnodes in node
         for node in ast.walk(self.definition):
+            # some subnodes does not has id attribute
             try:
+                # append if node.id is 'isinstance' or 'type'
                 if node.id in self.PYTHON_REFLECTION_EXPRESSIONS:
-                    reflection_list.append(node.lineno)
+                    line_number: int = node.lineno
+                    reflection_list.append(line_number)
             except:
+                # skip if node.id is not exist
                 continue
-        return reflection_list
+        # dont forget to convert to immutable type
+        return tuple(reflection_list)
 
-    def constructor_non_attribs_value_line_number(self):
+    def constructor_non_attribs_value_line_number(self) -> Tuple[int]:
 
         line_numbers = []
         if not isinstance(self.definition, _ast.FunctionDef):
-            return line_numbers
+            return tuple(line_numbers)
 
         if self.definition.name == '__init__':
             for expressions in self.definition.body:
@@ -113,7 +150,7 @@ class Function:
                     if not isinstance(target, _ast.Attribute):
                         line_numbers.append(target.lineno)
 
-        return line_numbers
+        return tuple(line_numbers)
 
     def non_assert_methods_at_test_function(self):
 
