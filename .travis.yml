@@ -6,4 +6,8 @@ env:
 install:
   - pip install -r ./src/requirements.txt
 
-script: pytest ./src/tests
+script:
+  - coverage pytest ./src/tests
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
