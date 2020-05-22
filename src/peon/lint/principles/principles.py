@@ -45,8 +45,12 @@ class Principle:
     def no_getters_and_setters(self):
         pass
 
-    def no_mutable_objects(self):
-        pass
+    def no_mutable_objects(self, line_numbers):
+        for line_number in line_numbers:
+            Report(
+                text=f'{self.file_object.path_to_file} [line:{line_number}]\n'
+                f'commentary: No mutable types {PrincipleLink.NO_MUTABLE_OBJECTS}\n',
+            ).to_stdout()
 
     def no_readers_parsers_or_controllers_or_sorters_and_so_on(self, line_number):
         if self.class_meta.name.endswith('er') or \

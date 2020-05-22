@@ -23,6 +23,7 @@ class Function:
 
     EMPTY_RETURNED_VALUE = True
     PYTHON_REFLECTION_EXPRESSIONS = ('type', 'isinstance')
+    MUTABLE_TYPES = ('set', 'dict', 'list')
 
     def __init__(
             self,
@@ -117,5 +118,29 @@ class Function:
             for expressions in self.definition.body:
                 if not isinstance(expressions, _ast.Assert):
                     line_numbers.append(expressions.lineno)
+
+        return line_numbers
+
+    def constructor_mutable_attribs_line_number(self):
+
+        line_numbers = []
+        if not isinstance(self.definition, _ast.FunctionDef):
+            return line_numbers
+
+        if self.definition.name == '__init__':
+            for expressions in self.definition.body:
+                # list
+                if expressions.value.__dict__.get('elts') is not None:
+                    line_numbers.append(expressions.lineno)
+                # dict
+                elif expressions.value.__dict__.get('keys') is not None:
+                    line_numbers.append(expressions.lineno)
+                # via keywords (list(), dict(), set())
+                elif expressions.value.__dict__.get('func') is not None:
+                    if expressions.value\
+                            .__dict__.get('func')\
+                            .__dict__.get('id') \
+                            in self.MUTABLE_TYPES:
+                        line_numbers.append(expressions.lineno)
 
         return line_numbers
