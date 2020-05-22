@@ -1,9 +1,11 @@
 from typing import List
 
-from peon.lint.file.analyze import InternalFileStruct
-from peon.lint.file.file import File
-from peon.lint.file.function_def.function import Function, FunctionParseResult
+
+
 from peon.lint.principles.principles import Principle
+from peon.project.ast_analyze import InternalFileStruct
+from peon.project.file.file import File
+from peon.project.file.function_def.function import Function
 
 
 class Lint:
@@ -17,8 +19,6 @@ class Lint:
     def project(self):
 
         for file in self.files:
-
-            print(f'check {file}')
 
             file = File(file)
             analyze = InternalFileStruct(file)
@@ -36,7 +36,6 @@ class Lint:
 
             # check classes
             for cls in analyze.class_definitions:
-
                 methods = cls.converted_methods()
                 self.lint_function_list(
                     function_list=methods,

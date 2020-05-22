@@ -2,7 +2,7 @@ import ast
 
 import _ast
 
-from peon.lint.file.function_def.expression.returned_expr import ReturnedExpression
+from peon.project.file.function_def.expression.returned_expr import ReturnedExpression
 
 
 class FunctionParseResult:
@@ -49,6 +49,11 @@ class Function:
                 return_not_none=bool(Function.EMPTY_RETURNED_VALUE),
                 line_number=node.lineno,
             )
+        elif isinstance(node, _ast.Expr):
+            return FunctionParseResult(
+                return_not_none=bool(Function.EMPTY_RETURNED_VALUE),
+                line_number=node.lineno,
+            )
 
         for item in node.body:
             if isinstance(item, _ast.Return):
@@ -65,6 +70,8 @@ class Function:
         if isinstance(self.definition, _ast.Assign):
             return False
         elif isinstance(self.definition, _ast.Pass):
+            return False
+        elif isinstance(self.definition, _ast.Expr):
             return False
 
         decorators = self.definition.decorator_list
@@ -137,8 +144,8 @@ class Function:
                     line_numbers.append(expressions.lineno)
                 # via keywords (list(), dict(), set())
                 elif expressions.value.__dict__.get('func') is not None:
-                    if expressions.value\
-                            .__dict__.get('func')\
+                    if expressions.value \
+                            .__dict__.get('func') \
                             .__dict__.get('id') \
                             in self.MUTABLE_TYPES:
                         line_numbers.append(expressions.lineno)

@@ -1,9 +1,8 @@
-import ast
 from typing import Optional, List
 
 import _ast
 
-from peon.lint.file.function_def.function import Function
+from peon.project.file.function_def.function import Function
 
 
 class Class:

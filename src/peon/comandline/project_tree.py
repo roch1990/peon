@@ -4,7 +4,7 @@ import os
 class ProjectTree:
 
     # TODO: вынести это проверкой в отдельный класс и вообще забирать из конфига
-    EXCLUDE_FOLDERS = ['build', 'venv']
+    DEFAULT_EXCLUDE_FOLDERS = ['build', 'venv']
 
     def __init__(
             self,
@@ -18,7 +18,7 @@ class ProjectTree:
             files_to_check = []
 
             for file in self.path_to_project:
-                if file[-3:] != '.py':
+                if not file.endswith('.py'):
                     continue
                 files_to_check.append(os.path.abspath(file))
             return files_to_check
