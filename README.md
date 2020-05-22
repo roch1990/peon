@@ -16,7 +16,41 @@
 
  # Why naive?
 
- Becase this linter is simple ast-nodes reader.
+ Becase it check only "plain definitions".
+
+ For example:
+
+ - good, linter check that:
+ ```python
+def some_function(some_arg):
+    some_var = some_arg
+
+```
+
+- bad, linter skip that (definition inside definiton - discourage and decrease code quality):
+ ```python
+def some_function(some_arg):
+    def some_another_function(some_arg):
+        return some_arg
+    some_var = some_another_function(some_arg)
+
+```
+
+- good, linter check that:
+ ```python
+class SomeClass:
+    pass
+
+```
+
+- bad, linter skip that (definition inside definiton - discourage and decrease code quality):
+ ```python
+class SomeClass:
+    class SomeAnotherClass:
+        pass
+    pass
+
+```
 
 
  # What eo principles i can check?
