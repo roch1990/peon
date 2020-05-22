@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/roch1990/peon.svg?branch=master)](https://travis-ci.org/roch1990/peon)
+
 ![](https://www.meme-arsenal.com/memes/4310e01cdd1fbad0ef9a7b48bfe8fdca.jpg)
 
 # In development now
