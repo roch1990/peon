@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/roch1990/peon.svg?branch=master)](https://travis-ci.org/roch1990/peon)
+[![codecov](https://codecov.io/gh/roch1990/peon/branch/master/graph/badge.svg)](https://codecov.io/gh/roch1990/peon)
 
 ![](https://www.meme-arsenal.com/memes/4310e01cdd1fbad0ef9a7b48bfe8fdca.jpg)
 
@@ -15,7 +16,41 @@
 
  # Why naive?
 
- Becase this linter is simple ast-nodes reader.
+ Becase it check only "plain definitions".
+
+ For example:
+
+ - good, linter check that:
+ ```python
+def some_function(some_arg):
+    some_var = some_arg
+
+```
+
+- bad, linter skip that (definition inside definiton - discourage and decrease code quality):
+ ```python
+def some_function(some_arg):
+    def some_another_function(some_arg):
+        return some_arg
+    some_var = some_another_function(some_arg)
+
+```
+
+- good, linter check that:
+ ```python
+class SomeClass:
+    pass
+
+```
+
+- bad, linter skip that (definition inside definiton - discourage and decrease code quality):
+ ```python
+class SomeClass:
+    class SomeAnotherClass:
+        pass
+    pass
+
+```
 
 
  # What eo principles i can check?
