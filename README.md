@@ -1,5 +1,9 @@
 [![Build Status](https://travis-ci.org/roch1990/peon.svg?branch=master)](https://travis-ci.org/roch1990/peon)
 [![codecov](https://codecov.io/gh/roch1990/peon/branch/master/graph/badge.svg)](https://codecov.io/gh/roch1990/peon)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=roch1990_peon&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=roch1990_peon)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=roch1990_peon&metric=alert_status)](https://sonarcloud.io/dashboard?id=roch1990_peon)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=roch1990_peon&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=roch1990_peon)
+[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=roch1990_peon&metric=sqale_index)](https://sonarcloud.io/dashboard?id=roch1990_peon)
 
 ![](https://www.meme-arsenal.com/memes/4310e01cdd1fbad0ef9a7b48bfe8fdca.jpg)
 
