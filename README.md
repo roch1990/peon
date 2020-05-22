@@ -27,7 +27,7 @@
  | No static methods, not even private ones | :heavy_check_mark:         |
  | No instanceof, type casting, or reflection | :heavy_check_mark:         |
  | No public methods without a contract | :x:         |
- | No statements in test methods except assertThat | :heavy_minus_sign:  |
+ | No statements in test methods except assertThat | :heavy_check_mark:  |
  | No ORM or ActiveRecord | :x:  |
  | No implementation inheritance | :heavy_check_mark: |
 
