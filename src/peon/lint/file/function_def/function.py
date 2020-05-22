@@ -23,6 +23,7 @@ class Function:
 
     EMPTY_RETURNED_VALUE = True
     PYTHON_REFLECTION_EXPRESSIONS = ('type', 'isinstance')
+    MUTABLE_TYPES = ('set', 'dict', 'list')
 
     def __init__(
             self,
@@ -118,4 +119,58 @@ class Function:
                 if not isinstance(expressions, _ast.Assert):
                     line_numbers.append(expressions.lineno)
 
+        return line_numbers
+
+    def constructor_mutable_attribs_line_number(self):
+
+        line_numbers = []
+        if not isinstance(self.definition, _ast.FunctionDef):
+            return line_numbers
+
+        if self.definition.name == '__init__':
+            for expressions in self.definition.body:
+                # list
+                if expressions.value.__dict__.get('elts') is not None:
+                    line_numbers.append(expressions.lineno)
+                # dict
+                elif expressions.value.__dict__.get('keys') is not None:
+                    line_numbers.append(expressions.lineno)
+                # via keywords (list(), dict(), set())
+                elif expressions.value.__dict__.get('func') is not None:
+                    if expressions.value\
+                            .__dict__.get('func')\
+                            .__dict__.get('id') \
+                            in self.MUTABLE_TYPES:
+                        line_numbers.append(expressions.lineno)
+
+        return line_numbers
+
+    def set_encapsulated_attribs_line_numbers(self):
+
+        line_numbers = []
+        if not isinstance(self.definition, _ast.FunctionDef):
+            return line_numbers
+
+        if self.definition.name != '__init__':
+
+            for expressions in self.definition.body:
+                if isinstance(expressions, _ast.Assign):
+                    for target in expressions.targets:
+                        # check for keyword 'self'
+                        try:
+                            value = target.value.value.id
+                            if value == 'self':
+                                line_numbers.append(target.lineno)
+                        except AttributeError:
+                            continue
+        return line_numbers
+
+    def setter_or_getters_def_names_line_numbers(self):
+
+        line_numbers = []
+        if not isinstance(self.definition, _ast.FunctionDef):
+            return line_numbers
+
+        if self.definition.name.startswith('set') or self.definition.name.startswith('get'):
+            line_numbers.append(self.definition.lineno)
         return line_numbers

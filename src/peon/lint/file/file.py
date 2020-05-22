@@ -12,5 +12,5 @@ class File:
         try:
             file_object = open(self.path_to_file, 'r')
             return file_object.read()
-        except (FileNotFoundError, IOError):
-            raise
+        except (FileNotFoundError, IOError) as err:
+            raise err
