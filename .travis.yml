@@ -7,7 +7,7 @@ install:
   - pip install -r ./src/requirements.txt
 
 script:
-  - coverage pytest ./src/tests
+  - coverage run -m pytest ./src/tests
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
