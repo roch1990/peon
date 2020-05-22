@@ -19,46 +19,6 @@
 
  This repo work only for python code.
 
-
- # Why naive?
-
- Becase it check only "plain definitions".
-
- For example:
-
- - good, linter check that:
- ```python
-def some_function(some_arg):
-    some_var = some_arg
-
-```
-
-- bad, linter skip that (definition inside definiton - discourage and decrease code quality):
- ```python
-def some_function(some_arg):
-    def some_another_function(some_arg):
-        return some_arg
-    some_var = some_another_function(some_arg)
-
-```
-
-- good, linter check that:
- ```python
-class SomeClass:
-    pass
-
-```
-
-- bad, linter skip that (definition inside definiton - discourage and decrease code quality):
- ```python
-class SomeClass:
-    class SomeAnotherClass:
-        pass
-    pass
-
-```
-
-
  # What eo principles i can check?
 
  | Priciple| Yes/No|
@@ -105,4 +65,64 @@ For example:
           - commit
         args:
           - ./src/peon
+```
+
+ # Why naive?
+
+ Becase it check only "plain definitions".
+
+ For example:
+
+ - good, linter check that:
+ ```python
+def some_function(some_arg):
+    some_var = some_arg
+
+```
+
+- bad, linter skip that (definition inside definiton - discourage and decrease code quality):
+ ```python
+def some_function(some_arg):
+    def some_another_function(some_arg):
+        return some_arg
+    some_var = some_another_function(some_arg)
+
+```
+
+- good, linter check that:
+ ```python
+class SomeClass:
+    pass
+
+```
+
+- bad, linter skip that (definition inside definiton - discourage and decrease code quality):
+ ```python
+class SomeClass:
+    class SomeAnotherClass:
+        pass
+    pass
+
+```
+
+# Testing this library
+
+It is simple:
+
+```bash
+make tests
+```
+
+this instruction starts both tests - unit and mutual.
+
+Show results of mutual tests:
+
+```bash
+mutmut results
+```
+
+Show result of concrete mutual test:
+
+```bash
+mutmut show <test_id:int>
 ```
