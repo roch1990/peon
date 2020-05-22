@@ -12,4 +12,5 @@ class Report:
         print(self.text, file=sys.stderr)
 
     def to_file(self):
-        pass
+        with open('peon_result.txt', 'w') as result:
+            result.write(self.text)

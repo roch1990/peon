@@ -1,9 +1,9 @@
 import ast
 from typing import List
 
-from peon.lint.file.class_def.classes import Class
-from peon.lint.file.file import File
-from peon.lint.file.function_def.function import Function
+from peon.project.file.class_def.classes import Class
+from peon.project.file.file import File
+from peon.project.file.function_def.function import Function
 
 
 class InternalFileStruct(ast.NodeVisitor):

@@ -1,5 +1,4 @@
 class PrincipleLink:
-
     NO_NULL = 'http://www.yegor256.com/2014/05/13/why-null-is-bad.html'
     NO_CODE_IN_CONSTRUCTORS = 'http://www.yegor256.com/2015/05/07/ctors-must-be-code-free.html'
     NO_GETTERS_AND_SETTERS = 'http://www.yegor256.com/2014/09/16/getters-and-setters-are-evil.html'
