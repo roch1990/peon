@@ -22,7 +22,7 @@ class Function:
     """
 
     EMPTY_RETURNED_VALUE = True
-    PYTHON_REFLECTION_EXPRESSIONS = ['type', 'isinstance']
+    PYTHON_REFLECTION_EXPRESSIONS = ('type', 'isinstance')
 
     def __init__(
             self,
@@ -104,5 +104,18 @@ class Function:
                 for target in expressions.targets:
                     if not isinstance(target, _ast.Attribute):
                         line_numbers.append(target.lineno)
+
+        return line_numbers
+
+    def non_assert_methods_at_test_function(self):
+
+        line_numbers = []
+        if not isinstance(self.definition, _ast.FunctionDef):
+            return line_numbers
+
+        if self.definition.name.startswith('test'):
+            for expressions in self.definition.body:
+                if not isinstance(expressions, _ast.Assert):
+                    line_numbers.append(expressions.lineno)
 
         return line_numbers

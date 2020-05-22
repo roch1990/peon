@@ -75,8 +75,12 @@ class Principle:
     def no_public_methods_without_a_contract_interface(self):
         pass
 
-    def no_statements_in_test_methods_except_assertThat(self):
-        pass
+    def no_statements_in_test_methods_except_assert(self, line_numbers):
+        for line_number in line_numbers:
+            Report(
+                text=f'{self.file_object.path_to_file} [line:{line_number}]\n'
+                f'commentary: No statements in test methods except assert {PrincipleLink.NO_STATEMENTS_AT_TEST_METHODS_EXCEPT_ASSERT}\n',
+            ).to_stdout()
 
     def no_orm(self):
         pass
