@@ -71,6 +71,10 @@ class Class:
         Check class for inheritance
         :return: bool
         """
+        # check field existence
+        if not self.base_classes:
+            return False
+
         # check, that class is not inherit from any base class
         if len(self.base_classes) > 0:
             return True

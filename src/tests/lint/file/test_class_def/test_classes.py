@@ -45,6 +45,11 @@ class ConstructorFixture:
         ],
         bases=None,
     )
+    class_with_inheritance = _ast.ClassDef(
+        name='Test',
+        body=[],
+        bases=[_ast.ClassDef(name='TestParent')],
+    )
 
 
 def test_constructor_class_constructor_valid():
@@ -79,3 +84,9 @@ def test_converted_methods_constructor_with_additional_method():
 
 def test_converted_methods_empty_class():
     assert not len(Class(ConstructorFixture.empty_class).converted_methods())
+
+def test_class_without_inheritance():
+    assert Class(ConstructorFixture.empty_class).inherited() is False
+
+def test_class_with_inheritance():
+    assert Class(ConstructorFixture.class_with_inheritance).inherited() is True
