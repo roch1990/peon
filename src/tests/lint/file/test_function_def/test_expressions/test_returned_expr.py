@@ -48,6 +48,16 @@ def test_return_value_is_filled_string():
     assert ReturnedExpression(_ast.Return(value=_ast.Str(s='test'), lineno=1)).value_not_none() is True
 
 
+def test_return_value_is_empty_joined_string():
+    # return ''
+    assert ReturnedExpression(_ast.Return(value=_ast.JoinedStr(values=[]), lineno=1)).value_not_none() is False
+
+
+def test_return_value_is_filled_joined_string():
+    # return '{}{}{}'.format('a', 'b', 'c')
+    assert ReturnedExpression(_ast.Return(value=_ast.JoinedStr(values=['a', 'b', 'c']), lineno=1)).value_not_none() is True
+
+
 def test_return_value_is_none():
     # return None
     assert ReturnedExpression(_ast.Return(value=_ast.NameConstant(value=None), lineno=1)).value_not_none() is False
@@ -223,3 +233,14 @@ def test_return_value_is_filled_frozenset_by_keyword():
             lineno=1,
         ),
     ).value_not_none() is True
+
+
+def test_return_is_empty():
+
+    # return nothing, not None, only 'return'
+    assert ReturnedExpression(
+        _ast.Return(
+            value=None,
+            lineno=1,
+        ),
+    ).value_not_none() is False
