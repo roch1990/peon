@@ -42,4 +42,8 @@ def test_method_decorated():
 
 
 def test_method_is_static():
-    assert Function(_ast.FunctionDef(name='test', decorator_list=['staticmethod'])).static_or_private() is False
+    assert Function(
+        _ast.FunctionDef(
+            name='test', decorator_list=[_ast.FunctionDef(id='staticmethod')],
+        ),
+    ).static_or_private() is True
