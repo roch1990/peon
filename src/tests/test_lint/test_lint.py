@@ -4,7 +4,6 @@ from tests.utils import TestProjectTree
 from peon.lint.lint import Lint
 
 
-
 def test_sucess():
     assert Lint(TestProjectTree().project_tree.inspect()).project() is None
 
