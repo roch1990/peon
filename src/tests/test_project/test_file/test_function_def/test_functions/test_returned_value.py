@@ -4,39 +4,36 @@ from peon.project.file.function_def.expression.returned_expr import ReturnedExpr
 from peon.project.file.function_def.function import Function, FunctionParseResult
 
 
-def test_node_is_none():
-    assert Function(definition=None).returned_value().__dict__ == FunctionParseResult(
+class FunctionParseResultFixture:
+
+    EMPTY_RETURNED_VALUE = FunctionParseResult(
         return_not_none=bool(Function.EMPTY_RETURNED_VALUE),
         line_number=-1,
     ).__dict__
 
 
+def test_node_is_none():
+    assert Function(definition=None).returned_value().__dict__ == FunctionParseResultFixture.EMPTY_RETURNED_VALUE
+
+
 def test_assign_expression_as_input():
-    assert Function(definition=_ast.Assign(lineno=1)).returned_value().__dict__ == FunctionParseResult(
-        return_not_none=bool(Function.EMPTY_RETURNED_VALUE),
-        line_number=1,
-    ).__dict__
+    assert Function(definition=_ast.Assign(lineno=1)).returned_value().__dict__ == \
+           FunctionParseResultFixture.EMPTY_RETURNED_VALUE
 
 
 def test_pass_expression_as_input():
-    assert Function(definition=_ast.Pass(lineno=1)).returned_value().__dict__ == FunctionParseResult(
-        return_not_none=bool(Function.EMPTY_RETURNED_VALUE),
-        line_number=1,
-    ).__dict__
+    assert Function(definition=_ast.Pass(lineno=1)).returned_value().__dict__ == \
+           FunctionParseResultFixture.EMPTY_RETURNED_VALUE
 
 
 def test_plain_expression_as_input():
-    assert Function(definition=_ast.Expr(lineno=1)).returned_value().__dict__ == FunctionParseResult(
-        return_not_none=bool(Function.EMPTY_RETURNED_VALUE),
-        line_number=1,
-    ).__dict__
+    assert Function(definition=_ast.Expr(lineno=1)).returned_value().__dict__ == \
+           FunctionParseResultFixture.EMPTY_RETURNED_VALUE
 
 
 def test_function_body_is_empty():
-    assert Function(definition=_ast.FunctionDef(lineno=1, body=[])).returned_value().__dict__ == FunctionParseResult(
-        return_not_none=bool(Function.EMPTY_RETURNED_VALUE),
-        line_number=1,
-    ).__dict__
+    assert Function(definition=_ast.FunctionDef(lineno=1, body=[])).returned_value().__dict__ == \
+           FunctionParseResultFixture.EMPTY_RETURNED_VALUE
 
 
 def test_function_body_without_return_expression():
@@ -44,10 +41,7 @@ def test_function_body_without_return_expression():
         definition=_ast.FunctionDef(
             lineno=1, body=[_ast.Pass(), _ast.Expr(), _ast.Assign],
         ),
-    ).returned_value().__dict__ == FunctionParseResult(
-        return_not_none=bool(Function.EMPTY_RETURNED_VALUE),
-        line_number=1,
-    ).__dict__
+    ).returned_value().__dict__ == FunctionParseResultFixture.EMPTY_RETURNED_VALUE
 
 
 def test_function_body_with_return_expression():
