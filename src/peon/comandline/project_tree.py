@@ -3,7 +3,7 @@ import os
 
 class ProjectTree:
 
-    # TODO: вынести это проверкой в отдельный класс и вообще забирать из конфига
+    # TODO: fill from config
     DEFAULT_EXCLUDE_FOLDERS = ['build', 'venv']
 
     def __init__(

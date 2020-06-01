@@ -29,6 +29,9 @@ class Principle:
     def no_null(self, line_number):
         check_result: FunctionParseResult = self.returned_expression
 
+        if not check_result:
+            return
+
         if not check_result.return_not_none:
             Report(
                 text=f'{self.file_object.path_to_file} [line:{line_number}]\n'

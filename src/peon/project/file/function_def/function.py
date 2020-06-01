@@ -129,7 +129,7 @@ class Function:
                 if node.id in self.PYTHON_REFLECTION_EXPRESSIONS:
                     line_number: int = node.lineno
                     reflection_list.append(line_number)
-            except:
+            except:  #nosec
                 # skip if node.id is not exist
                 continue
         # dont forget to convert to immutable type
