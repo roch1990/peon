@@ -1,7 +1,7 @@
 import pytest
+from tests.utils import TestProjectTree
 
 from peon.lint.lint import Lint
-from tests.utils import TestProjectTree
 
 
 def test_sucess():

@@ -1,3 +1,5 @@
 pytest==5.4.2
 coverage==5.1
 pre-commit==2.4.0
+mutmut==2.0.0
+bandit==1.6.2
