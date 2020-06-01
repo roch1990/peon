@@ -16,8 +16,8 @@ def test_return_value_is_func():
     ).value_not_none() is True
 
 
+# return 1
 def test_return_value_is_int_one():
-    # return 1
     assert ReturnedExpression(_ast.Return(value=_ast.Num(n=1), lineno=1)).value_not_none() is True
 
 
