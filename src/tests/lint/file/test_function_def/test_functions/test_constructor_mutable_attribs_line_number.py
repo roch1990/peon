@@ -16,9 +16,9 @@ class ConstructorMutableAttribsLineNumberFixture:
     )
     constructor_with_mutable = _ast.FunctionDef(
         name='__init__', body=[
-            _ast.Assign(lineno=1, value=_ast.Tuple(elts=[1, 2, 3])),
-            _ast.Assign(lineno=2, value=_ast.Str(s='a')),
-            _ast.Assign(lineno=3, value=_ast.JoinedStr(values=None)),
+            _ast.Assign(lineno=1, value=_ast.List(elts=[1, 2, 3])),
+            _ast.Assign(lineno=2, value=_ast.Set(elts=[1, 2, 3])),
+            _ast.Assign(lineno=3, value=_ast.Dict(keys=['a'])),
         ],
     )
 

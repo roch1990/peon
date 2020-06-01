@@ -11,7 +11,7 @@ class ConstructorNonAttribsValueLineNumberFixture:
         name='__init__', body=[_ast.Assign(targets=[_ast.Attribute(lineno=2)], lineno=1)],
     )
     definitions_consist_of_assign_without_attribute = _ast.FunctionDef(
-        name='__init__', body=[_ast.Assign(targets=[_ast.Attribute(lineno=2)], lineno=1)],
+        name='__init__', body=[_ast.Assign(targets=[_ast.Expr(lineno=2)], lineno=1)],
     )
     definitions_consist_of_any_but_not_a_assign = _ast.FunctionDef(name='__init__', body=[_ast.Pass(lineno=3)])
 
