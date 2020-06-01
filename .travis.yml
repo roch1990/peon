@@ -8,7 +8,9 @@ install:
 
 script:
   - coverage run -m pytest ./src/tests
+  - coverage xml -o coverage-report.xml
   - mutmut --paths-to-mutate ./src/peon --tests-dir ./src/unit run || true && mutmut results
+  - bandit -r ./src -x ./src/tests
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)

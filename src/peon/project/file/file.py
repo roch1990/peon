@@ -1,11 +1,19 @@
 class File:
 
+    PYTHON_FILE_EXTENSION = '.py'
+
     def __init__(self, path_to_file: str):
         self.path_to_file = path_to_file
 
     def check_extension(self):
-        file_extension_is_py = self.path_to_file.endswith('.py')
-        return file_extension_is_py
+        """
+        Check file extension. Need only '*.py' files.
+        :return: bool
+        """
+
+        if not self.path_to_file:
+            return False
+        return self.path_to_file.endswith(self.PYTHON_FILE_EXTENSION)
 
     def open(self):
         try:
