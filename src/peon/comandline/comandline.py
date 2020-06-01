@@ -1,4 +1,5 @@
 import argparse
+import os
 import sys
 
 from peon.comandline.project_tree import ProjectTree
@@ -17,7 +18,7 @@ class CommandLine:
             type=str,
             nargs='*',
             help='path to your project or single file',
-            default='./',
+            default=os.path.curdir,
         )
 
     def parse_input(self):
