@@ -54,9 +54,6 @@ class Lint:
                 if principles.violation:
                     self.violation = self.violation or principles.violation
 
-        if self.violation:
-            exit(127)
-
     def lint_function_list(self, function_list: List[Function], file: File):
 
         for func in function_list:
