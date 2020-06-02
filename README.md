@@ -80,7 +80,6 @@ or not recommended way
 python3 ./peon/__main__.py
 ```
 
-
 ## Add linter to pre-commit hooks
 
 You can use this linter by adding it to [pre-commit](https://pre-commit.com/) configuration file.
@@ -106,7 +105,6 @@ or (for check only changed files):
         stages:
           - commit
 ```
-
 
 # Some theoretical nuances
 ## Why naive?
@@ -167,6 +165,7 @@ After you clone repo:
 - setup PYTHONPATH
 
 `export PYTHONPATH=$PWD/peon`
+
 
 And then feel free to make a changes.
 
