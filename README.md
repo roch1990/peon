@@ -3,14 +3,33 @@
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=roch1990_peon&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=roch1990_peon)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=roch1990_peon&metric=alert_status)](https://sonarcloud.io/dashboard?id=roch1990_peon)
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=roch1990_peon&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=roch1990_peon)
+[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=roch1990_peon&metric=duplicated_lines_density)](https://sonarcloud.io/dashboard?id=roch1990_peon)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=roch1990_peon&metric=code_smells)](https://sonarcloud.io/dashboard?id=roch1990_peon)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=roch1990_peon&metric=security_rating)](https://sonarcloud.io/dashboard?id=roch1990_peon)
 [![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=roch1990_peon&metric=sqale_index)](https://sonarcloud.io/dashboard?id=roch1990_peon)
 [![Hits-of-Code](https://hitsofcode.com/github/roch1990/peon)](https://hitsofcode.com/view/github/roch1990/peon)
 
 ![](https://www.meme-arsenal.com/memes/4310e01cdd1fbad0ef9a7b48bfe8fdca.jpg)
 
-# In development now
+# PEON (In development now)
 
-# PEON
+# Table of contents
+
+- [Introduction](#introduction)
+    - [What is that](#what-is-that)
+    - [What eo principles i can check](#what-eo-principles-i-can-check)
+- [Use-cases](#use-cases)
+    - [Shell](#from-shell)
+    - [Pre-commit hook](#add-linter-to-pre-commit-hooks)
+- [Some theoretical nuances](#some-theoretical-nuances)
+    - [Why naive](#why-naive)
+- [Development](#development)
+    - [Testing](#testing)
+    - [Contributing](#contributing)
+- [License](./LICENSE.txt)
+
+# Introduction
+## What is that?
 
  "Python Elegant Objects Naive" linter allows you to check your code for conditions of
  "[Elegant objects](https://www.elegantobjects.org/)" OOP architecture,
@@ -18,7 +37,7 @@
 
  This repo work only for python code.
 
- # What eo principles i can check?
+## What eo principles i can check?
 
  | Priciple| Yes/No|
  | ------------- |:------------------:|
@@ -44,13 +63,15 @@
 
 # Use-cases
 
+## From shell
+
 Simply you should run something like this
 
 ```bash
 peon ./src
 ```
 
-# Add linter to pre-commit hooks
+## Add linter to pre-commit hooks
 
 You can use this linter by adding it to [pre-commit](https://pre-commit.com/) configuration file.
 
@@ -66,7 +87,8 @@ For example:
           - ./src/peon
 ```
 
- # Why naive?
+# Some theoretical nuances
+## Why naive?
 
  Becase it check only "plain definitions".
 
@@ -104,7 +126,8 @@ class SomeClass:
 
 ```
 
-# Testing this library
+# Development
+## Testing
 
 It is simple:
 
@@ -125,3 +148,14 @@ Show result of concrete mutual test:
 ```bash
 mutmut show <test_id:int>
 ```
+
+## Contributing
+
+Easiest way is:
+- fork
+- make changes at your branch
+- commit and create PR to dev branch of this repo
+
+If all check would be passed - I check your changes so fast, as i can.
+
+P.S.: falling of mutual tests - is normal now (in development, as you remember)
