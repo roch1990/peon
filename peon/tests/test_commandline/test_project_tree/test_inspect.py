@@ -8,7 +8,7 @@ def test_inspect_success():
     assert list(
         set(
             ProjectTree(
-                path_to_project=f'{TestProjectTree().pythonpath}/tests/fixtures',
+                path_to_project=[f'{TestProjectTree().pythonpath}/tests/fixtures'],
             ).inspect(),
         ) - set([
                    f'{TestProjectTree().pythonpath}/tests/fixtures/dummy_code.py',
@@ -24,5 +24,4 @@ def test_inspect_type_error():
 
 
 def test_inspect_wrong_path():
-    with pytest.raises(FileNotFoundError):
-        assert ProjectTree('atatat/tratata').inspect()
+    assert ProjectTree(['atatat/tratata']).inspect() == []

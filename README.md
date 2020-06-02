@@ -3,14 +3,36 @@
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=roch1990_peon&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=roch1990_peon)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=roch1990_peon&metric=alert_status)](https://sonarcloud.io/dashboard?id=roch1990_peon)
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=roch1990_peon&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=roch1990_peon)
+[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=roch1990_peon&metric=duplicated_lines_density)](https://sonarcloud.io/dashboard?id=roch1990_peon)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=roch1990_peon&metric=code_smells)](https://sonarcloud.io/dashboard?id=roch1990_peon)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=roch1990_peon&metric=security_rating)](https://sonarcloud.io/dashboard?id=roch1990_peon)
 [![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=roch1990_peon&metric=sqale_index)](https://sonarcloud.io/dashboard?id=roch1990_peon)
 [![Hits-of-Code](https://hitsofcode.com/github/roch1990/peon)](https://hitsofcode.com/view/github/roch1990/peon)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ![](https://www.meme-arsenal.com/memes/4310e01cdd1fbad0ef9a7b48bfe8fdca.jpg)
 
-# In development now
+# PEON (In development now)
 
-# PEON
+# Table of contents
+
+- [Introduction](#introduction)
+    - [What is that](#what-is-that)
+    - [What eo principles i can check](#what-eo-principles-i-can-check)
+- [Use-cases](#use-cases)
+    - [Shell](#from-shell)
+    - [Pre-commit hook](#add-linter-to-pre-commit-hooks)
+- [Some theoretical nuances](#some-theoretical-nuances)
+    - [Why naive](#why-naive)
+- [Development](#development)
+    - [Testing](#testing)
+    - [Contributing](#contributing)
+        - [Commit naming conventions](#commit-naming-conventions)
+        - [Pull-request naming conventions](#pull-request-naming-conventions)
+- [License](./LICENSE.txt)
+
+# Introduction
+## What is that?
 
  "Python Elegant Objects Naive" linter allows you to check your code for conditions of
  "[Elegant objects](https://www.elegantobjects.org/)" OOP architecture,
@@ -18,7 +40,7 @@
 
  This repo work only for python code.
 
- # What eo principles i can check?
+## What eo principles i can check?
 
  | Priciple| Yes/No|
  | ------------- |:------------------:|
@@ -44,13 +66,22 @@
 
 # Use-cases
 
+## From shell
+
 Simply you should run something like this
 
 ```bash
 peon ./src
 ```
 
-# Add linter to pre-commit hooks
+or not recommended way
+
+```bash
+python3 ./src/__main__.py
+```
+
+
+## Add linter to pre-commit hooks
 
 You can use this linter by adding it to [pre-commit](https://pre-commit.com/) configuration file.
 
@@ -66,7 +97,8 @@ For example:
           - ./src
 ```
 
- # Why naive?
+# Some theoretical nuances
+## Why naive?
 
  Because it checks only "plain definitions".
 
@@ -104,9 +136,32 @@ class SomeClass:
 
 ```
 
-# Testing this library
+# Development
 
-It is simple:
+## Pre-requisite
+
+After you clone repo:
+- create virtual env
+
+`python3 -m venv /path/to/new/virtual/environment`
+
+- install requirements
+
+`pip3 install - r ./src/requirements.txt`
+
+- install pre-commit hooks
+
+`pre-commit install`
+
+- setup PYTHONPATH
+
+`export PYTHONPATH=$PWD/src`
+
+And then feel free to make a changes.
+
+## Testing
+
+You can start local test:
 
 ```bash
 make tests
@@ -125,3 +180,29 @@ Show result of concrete mutual test:
 ```bash
 mutmut show <test_id:int>
 ```
+
+## Contributing
+
+Easiest way is:
+- fork
+- make changes at your branch
+- commit and create PR to dev branch of this repo
+
+If all check would be passed - I check your changes so fast, as i can.
+
+P.S.: falling of mutual tests - is normal now (in development, as you remember)
+
+### Commit naming conventions
+
+Every commit should start with keyword with colon:
+- `feature:` (if you add new functionality)
+- `fix:` (if you fix bug or invalid behaviour)
+- `chore:` (if you fix something, that you were not going to fix)
+
+Then, after keyword you should shortly describe your changes:
+`feature: add sec test step to travis`
+
+### Pull request naming conventions
+
+Every pull request should start with keyword pr and issue number:
+`pr-23`
