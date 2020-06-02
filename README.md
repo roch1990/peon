@@ -166,7 +166,6 @@ After you clone repo:
 
 `export PYTHONPATH=$PWD/peon`
 
-
 And then feel free to make a changes.
 
 ## Testing
