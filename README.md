@@ -63,12 +63,12 @@ For example:
         stages:
           - commit
         args:
-          - ./src/peon
+          - ./src
 ```
 
  # Why naive?
 
- Becase it check only "plain definitions".
+ Because it checks only "plain definitions".
 
  For example:
 
