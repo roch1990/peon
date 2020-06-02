@@ -1,7 +1,5 @@
 from typing import List
 
-
-
 from peon.src.lint.principles.principles import Principle
 from peon.src.project.ast_analyze import InternalFileStruct
 from peon.src.project.file.file import File
@@ -15,6 +13,7 @@ class Lint:
             files: tuple,
     ):
         self.files = files
+        self.violation = False
 
     def project(self):
 
@@ -52,6 +51,12 @@ class Lint:
                 principles.no_readers_parsers_or_controllers_or_sorters_and_so_on(cls.definition.lineno)
                 principles.no_inheritance(cls.definition.lineno)
 
+                if principles.violation:
+                    self.violation = self.violation or principles.violation
+
+            if self.violation:
+                exit(127)
+
     def lint_function_list(self, function_list: List[Function], file: File):
 
         for func in function_list:
@@ -70,3 +75,6 @@ class Lint:
             principles.no_mutable_objects(func.constructor_mutable_attribs_line_number())
             principles.no_getters_and_setters(func.set_encapsulated_attribs_line_numbers())
             principles.no_getters_and_setters(func.setter_or_getters_def_names_line_numbers())
+
+            if principles.violation:
+                self.violation = self.violation or principles.violation
