@@ -27,4 +27,6 @@ class CommandLine:
 
             project_tree = ProjectTree(args.path_to_project)
             files = project_tree.inspect()
+
+            print(f'Files to check: {files}')
             Lint(files).project()
