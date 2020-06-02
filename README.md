@@ -73,6 +73,13 @@ Simply you should run something like this
 peon ./src
 ```
 
+or not recommended way
+
+```bash
+python3 ./src/__main__.py
+```
+
+
 ## Add linter to pre-commit hooks
 
 You can use this linter by adding it to [pre-commit](https://pre-commit.com/) configuration file.
@@ -129,9 +136,31 @@ class SomeClass:
 ```
 
 # Development
+
+## Pre-requisite
+
+After you clone repo:
+- create virtual env
+
+`python3 -m venv /path/to/new/virtual/environment`
+
+- install requirements
+
+`pip3 install - r ./src/requirements.txt`
+
+- install pre-commit hooks
+
+`pre-commit install`
+
+- setup PYTHONPATH
+
+`export PYTHONPATH=$PWD/src`
+
+And then feel free to make a changes.
+
 ## Testing
 
-It is simple:
+You can start local test:
 
 ```bash
 make tests
