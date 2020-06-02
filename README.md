@@ -68,33 +68,42 @@
 
 ## From shell
 
-Simply you should run something like this
+Simply you should run something like this (dont forget to `python3 setup.py install`)
 
 ```bash
-peon ./src
+peon ./path/to/code
 ```
 
 or not recommended way
 
 ```bash
-python3 ./src/__main__.py
+python3 ./peon/__main__.py
 ```
-
 
 ## Add linter to pre-commit hooks
 
 You can use this linter by adding it to [pre-commit](https://pre-commit.com/) configuration file.
 
-For example:
+For example (for check all project):
 ```yaml
   - repo: https://github.com/roch1990/peon
-    rev: master
+    rev: '0.13'
     hooks:
       - id: peon
         stages:
           - commit
         args:
-          - ./src
+          - ./peon
+```
+
+or (for check only changed files):
+```yaml
+  - repo: https://github.com/roch1990/peon
+    rev: '0.13'
+    hooks:
+      - id: peon
+        stages:
+          - commit
 ```
 
 # Some theoretical nuances
@@ -147,7 +156,7 @@ After you clone repo:
 
 - install requirements
 
-`pip3 install - r ./src/requirements.txt`
+`pip3 install - r ./peon/requirements.txt`
 
 - install pre-commit hooks
 
@@ -155,7 +164,8 @@ After you clone repo:
 
 - setup PYTHONPATH
 
-`export PYTHONPATH=$PWD/src`
+`export PYTHONPATH=$PWD/peon`
+
 
 And then feel free to make a changes.
 
