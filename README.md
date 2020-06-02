@@ -26,6 +26,8 @@
 - [Development](#development)
     - [Testing](#testing)
     - [Contributing](#contributing)
+        - [Commit naming conventions](#commit-naming-conventions)
+        - [Pull-request naming conventions](#pull-request-naming-conventions)
 - [License](./LICENSE.txt)
 
 # Introduction
@@ -159,3 +161,18 @@ Easiest way is:
 If all check would be passed - I check your changes so fast, as i can.
 
 P.S.: falling of mutual tests - is normal now (in development, as you remember)
+
+### Commit naming conventions
+
+Every commit should start with keyword with colon:
+- `feature:` (if you add new functionality)
+- `fix:` (if you fix bug or invalid behaviour)
+- `chore:` (if you fix something, that you were not going to fix)
+
+Then, after keyword you should shortly describe your changes:
+`feature: add sec test step to travis`
+
+### Pull request naming conventions
+
+Every pull request should start with keyword pr and issue number:
+`pr-23`
