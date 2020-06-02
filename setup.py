@@ -10,7 +10,7 @@ setup(
     packages=find_packages(exclude=['tests', 'tests.*']),
     entry_points={
       'console_scripts': [
-          'peon = src.__main__:main',
+          'peon = peon.__main__:main',
       ],
     },
 )

@@ -2,15 +2,15 @@ language: python
 python:
   - "3.7"
 env:
-  - PYTHONPATH=$PWD/src
+  - PYTHONPATH=$PWD/peon
 install:
-  - pip install -r ./src/requirements.txt
+  - pip install -r ./peon/requirements.txt
 
 script:
-  - coverage run -m pytest ./src/tests
+  - coverage run -m pytest ./peon/tests
   - coverage xml -o coverage-report.xml
-  - mutmut --paths-to-mutate ./src/peon --tests-dir ./src/unit run || true && mutmut results
-  - bandit -r ./src -x ./src/tests
+  - mutmut --paths-to-mutate ./peon/src --tests-dir ./peon/tests run || true && mutmut results
+  - bandit -r ./peon -x ./peon/tests
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
