@@ -31,3 +31,4 @@ class CommandLine:
 
             print(f'Files to check: {files}')
             Lint(files).project()
+        exit(127)

@@ -39,11 +39,9 @@ repos:
         stages:
           - commit
           - push
-#  - repo: https://github.com/roch1990/peon
-#    rev: v0.4
-#    hooks:
-#      - id: src
-#        stages:
-#          - commit
-#        args:
-#          - ./src/src
+  - repo: https://github.com/roch1990/peon
+    rev: '0.7'
+    hooks:
+      - id: peon
+        stages:
+          - commit
