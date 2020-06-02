@@ -8,6 +8,7 @@
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=roch1990_peon&metric=security_rating)](https://sonarcloud.io/dashboard?id=roch1990_peon)
 [![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=roch1990_peon&metric=sqale_index)](https://sonarcloud.io/dashboard?id=roch1990_peon)
 [![Hits-of-Code](https://hitsofcode.com/github/roch1990/peon)](https://hitsofcode.com/view/github/roch1990/peon)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ![](https://www.meme-arsenal.com/memes/4310e01cdd1fbad0ef9a7b48bfe8fdca.jpg)
 
@@ -93,13 +94,13 @@ For example:
         stages:
           - commit
         args:
-          - ./src/peon
+          - ./src
 ```
 
 # Some theoretical nuances
 ## Why naive?
 
- Becase it check only "plain definitions".
+ Because it checks only "plain definitions".
 
  For example:
 

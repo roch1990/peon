@@ -40,10 +40,8 @@ repos:
           - commit
           - push
 #  - repo: https://github.com/roch1990/peon
-#    rev: v0.4
+#    rev: '0.12'
 #    hooks:
 #      - id: peon
 #        stages:
 #          - commit
-#        args:
-#          - ./src/peon

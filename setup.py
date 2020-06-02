@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='peon',
-    version='0.4',
+    version='0.13',
     description='Python "Elegant Object" Naive linter. ',
     url='https://github.com/roch1990/peon',
     author='roch1990',
@@ -10,7 +10,7 @@ setup(
     packages=find_packages(exclude=['tests', 'tests.*']),
     entry_points={
       'console_scripts': [
-          'peon = src.__main__:main',
+          'peon = peon.__main__:main',
       ],
     },
 )
