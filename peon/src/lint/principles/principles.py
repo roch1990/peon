@@ -62,6 +62,7 @@ class Principle:
                 text=f'{self.file_object.path_to_file}:{line_number} [line:{line_number}]\n'
                 f'commentary: No mutable types {PrincipleLink.NO_MUTABLE_OBJECTS}\n',
             ).to_stdout()
+            self.violation = True
 
     def no_readers_parsers_or_controllers_or_sorters_and_so_on(self, line_number):
         if self.class_meta.name.endswith('er') or \
