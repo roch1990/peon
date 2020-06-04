@@ -21,15 +21,3 @@ class File:
             return file_object.read()
         except (FileNotFoundError, IOError) as err:
             raise err
-
-    def class_list(self, file: str, classes: tuple):
-        for cls in classes:
-            methods = cls.converted_methods()
-            self.lint_function_list(
-                functions=methods,
-                file=file,
-            )
-
-    def function_list(self, file: str, functions: tuple):
-        for func in function_list:
-            principles.no_null(func.returned_value().line_number)
