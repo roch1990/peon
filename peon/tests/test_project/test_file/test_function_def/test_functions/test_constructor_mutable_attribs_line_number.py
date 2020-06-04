@@ -7,10 +7,15 @@ class ConstructorMutableAttribsLineNumberFixture:
     definition_is_none = None
     definition_is_not_a_function = _ast.Pass
     constructor_with_empty_body = _ast.FunctionDef(name='__init__', body=[])
-    constructor_with_immutable = _ast.FunctionDef(
+    constructor_with_immutable_python37 = _ast.FunctionDef(
         name='__init__', body=[
             _ast.Assign(lineno=1, value=_ast.Tuple(elts=[1, 2, 3])),
             _ast.Assign(lineno=2, value=_ast.Str(s='a')),
+        ],
+    )
+    constructor_with_immutable_python38 = _ast.FunctionDef(
+        name='__init__', body=[
+            _ast.Assign(lineno=1, value=_ast.Tuple(elts=[1, 2, 3])),
             _ast.Assign(lineno=3, value=_ast.JoinedStr(values=None)),
         ],
     )
@@ -42,9 +47,14 @@ def test_constructor_with_empty_body():
 
 
 def test_constructor_with_immutable():
-    assert FunctionLint(
-        definition=ConstructorMutableAttribsLineNumberFixture.constructor_with_immutable,
-    ).constructor_mutable_attribs_line_number() == ()
+    try:
+        assert FunctionLint(
+            definition=ConstructorMutableAttribsLineNumberFixture.constructor_with_immutable_python37,
+        ).constructor_mutable_attribs_line_number() == ()
+    except (AttributeError):
+        assert FunctionLint(
+            definition=ConstructorMutableAttribsLineNumberFixture.constructor_with_immutable_python38,
+        ).constructor_mutable_attribs_line_number() == ()
 
 
 def test_constructor_with_mutable():
