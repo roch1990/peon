@@ -29,9 +29,6 @@ class CommandLine:
             project_tree = ProjectTree(args.path_to_project)
             files = project_tree.inspect()
 
-            lint_result = Lint(files)
+            lint_result = Lint(files=tuple(files), output_channel='stdout')
             lint_result.project()
-
-            if lint_result.violation:
-                exit(127)
             exit(0)

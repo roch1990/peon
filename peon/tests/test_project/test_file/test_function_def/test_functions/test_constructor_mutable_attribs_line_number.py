@@ -1,6 +1,6 @@
 import _ast
 
-from peon.src.project.file.function_def.function import Function
+from peon.src.project.file.function_def.function import FunctionLint
 
 
 class ConstructorMutableAttribsLineNumberFixture:
@@ -24,30 +24,30 @@ class ConstructorMutableAttribsLineNumberFixture:
 
 
 def test_definitions_is_none():
-    assert Function(
+    assert FunctionLint(
         definition=ConstructorMutableAttribsLineNumberFixture.definition_is_none,
     ).constructor_mutable_attribs_line_number() == ()
 
 
 def test_definition_is_not_a_function():
-    assert Function(
+    assert FunctionLint(
         definition=ConstructorMutableAttribsLineNumberFixture.definition_is_not_a_function,
     ).constructor_mutable_attribs_line_number() == ()
 
 
 def test_constructor_with_empty_body():
-    assert Function(
+    assert FunctionLint(
         definition=ConstructorMutableAttribsLineNumberFixture.constructor_with_empty_body,
     ).constructor_mutable_attribs_line_number() == ()
 
 
 def test_constructor_with_immutable():
-    assert Function(
+    assert FunctionLint(
         definition=ConstructorMutableAttribsLineNumberFixture.constructor_with_immutable,
     ).constructor_mutable_attribs_line_number() == ()
 
 
 def test_constructor_with_mutable():
-    assert Function(
+    assert FunctionLint(
         definition=ConstructorMutableAttribsLineNumberFixture.constructor_with_mutable,
     ).constructor_mutable_attribs_line_number() == (1, 2, 3)

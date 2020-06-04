@@ -3,6 +3,7 @@ import os
 import pytest
 
 from peon.src.lint.report.report import Report
+from peon.src.lint.report.report_channels import ReportChannels
 
 
 class ReportToFileFixture:
@@ -18,18 +19,18 @@ class ReportToFileFixture:
 
 
 def test_text_is_none():
-    Report(text=None).to_file()
+    Report(text=None, channel=ReportChannels.file).to_file()
     with pytest.raises(FileNotFoundError):
         assert ReportToFileFixture().content()
 
 
 def test_text_is_empty_string():
-    Report(text='').to_file()
+    Report(text='', channel=ReportChannels.file).to_file()
     with pytest.raises(FileNotFoundError):
         assert ReportToFileFixture().content()
 
 
 def test_text_is_filled_string():
-    Report(text='test').to_file()
+    Report(text='test', channel=ReportChannels.file).to_file()
     assert ReportToFileFixture().content() == 'test'
     ReportToFileFixture().clean()

@@ -1,6 +1,6 @@
 import _ast
 
-from peon.src.project.file.function_def.function import Function
+from peon.src.project.file.function_def.function import FunctionLint
 
 
 class SetEncapsulatedAttribsLineNumbersFixture:
@@ -24,36 +24,36 @@ class SetEncapsulatedAttribsLineNumbersFixture:
 
 
 def test_function_definition_is_none():
-    assert Function(
+    assert FunctionLint(
         definition=SetEncapsulatedAttribsLineNumbersFixture.definition_is_none,
     ).set_encapsulated_attribs_line_numbers() == ()
 
 
 def test_function_definition_is_pass():
-    assert Function(
+    assert FunctionLint(
         definition=SetEncapsulatedAttribsLineNumbersFixture.definition_is_pass,
     ).set_encapsulated_attribs_line_numbers() == ()
 
 
 def test_function_is_constructor():
-    assert Function(
+    assert FunctionLint(
         definition=SetEncapsulatedAttribsLineNumbersFixture.is_constructor,
     ).set_encapsulated_attribs_line_numbers() == ()
 
 
 def test_function_without_assign():
-    assert Function(
+    assert FunctionLint(
         definition=SetEncapsulatedAttribsLineNumbersFixture.without_assign,
     ).set_encapsulated_attribs_line_numbers() == ()
 
 
 def test_function_with_assign_without_self():
-    assert Function(
+    assert FunctionLint(
         definition=SetEncapsulatedAttribsLineNumbersFixture.with_assign_without_self,
     ).set_encapsulated_attribs_line_numbers() == ()
 
 
 def test_function_with_assign_with_self():
-    assert Function(
+    assert FunctionLint(
         definition=SetEncapsulatedAttribsLineNumbersFixture.with_assign_with_self,
     ).set_encapsulated_attribs_line_numbers() == (1,)

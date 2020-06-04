@@ -1,114 +1,93 @@
-
-
-from peon.src.lint.principles.links import PrincipleLink
+from peon.src.lint.principles.definition.no_code_in_constructors import NoCodeInConstructor
+from peon.src.lint.principles.definition.no_getters_and_setters import NoGettersAndSetters
+from peon.src.lint.principles.definition.no_null import NoNull
 from peon.src.lint.report.report import Report
-from peon.src.project.file.class_def.classes import Class
-from peon.src.project.file.file import File
-from peon.src.project.file.function_def.function import FunctionParseResult
+from peon.src.lint.principles.definition.no_inheritance import NoInheritance
+from peon.src.lint.principles.definition.no_instance_of_or_type_casting import NoInstanceOfOrTypeCastingOrReflection
+from peon.src.lint.principles.definition.no_mutable_objects import NoMutableObjects
+from peon.src.lint.principles.definition.no_readers_parsers_and_so_on import \
+    NoReadersParsersOrControllersOrSortersAndSoOn
+from peon.src.lint.principles.definition.no_statements_in_test_methods_except_assert import \
+    NoStatementsInTestMethodsExceptAssert
+from peon.src.lint.principles.definition.no_static_methods_and_not_even_private_ones import \
+    NoStaticMethodsAndNotEvenPrivateOnes
 
 
 class Principle:
-    NON_RETURN_CASES = ('None', '\'\'', '[]', '{}', '()')
-    MUTABLE_OBJECT_TYPES = ('list', 'set', 'dict', '[', '{')
-    RESTRICTED_ENDINGS = ['er', 'es', 'ers', 'or']
 
     def __init__(
             self,
-            file_object: File,
+            files: tuple,
             output_channel: str,
-            returned_expression: object,
-            static_decorator: bool,
-            class_meta: Class,
     ):
-        self.file_object = file_object
+        self.files = files
         self.output_channel = output_channel
-        self.returned_expression = returned_expression
-        self.static_decorator = static_decorator
-        self.class_meta = class_meta
-        self.violation = False
 
-    def no_null(self, line_number):
-        check_result: FunctionParseResult = self.returned_expression
+    def no_null(self) -> Report:
+        principle = NoNull(
+            files=self.files,
+            output_channel=self.output_channel,
+        )
+        return principle.check_rule()
 
-        if not check_result:
-            return
+    def no_code_in_constructors(self) -> Report:
+        principle = NoCodeInConstructor(
+            files=self.files,
+            output_channel=self.output_channel,
+        )
+        return principle.check_rule()
 
-        if not check_result.return_not_none:
-            Report(
-                text=f'{self.file_object.path_to_file}:{line_number} [line:{line_number}]\n'
-                f'commentary: No null rule {PrincipleLink.NO_NULL}\n',
-            ).to_stdout()
-            self.violation = True
+    def no_getters_and_setters(self) -> Report:
+        principle = NoGettersAndSetters(
+            files=self.files,
+            output_channel=self.output_channel,
+        )
+        return principle.check_rule()
 
-    def no_code_in_constructors(self, line_numbers):
-        for line_number in line_numbers:
-            Report(
-                text=f'{self.file_object.path_to_file}:{line_number} [line:{line_number}]\n'
-                f'commentary: No code in constructor {PrincipleLink.NO_CODE_IN_CONSTRUCTORS}\n',
-            ).to_stdout()
-            self.violation = True
+    def no_mutable_objects(self) -> Report:
+        principle = NoMutableObjects(
+            files=self.files,
+            output_channel=self.output_channel,
+        )
+        return principle.check_rule()
 
-    def no_getters_and_setters(self, line_numbers):
-        for line_number in line_numbers:
-            Report(
-                text=f'{self.file_object.path_to_file}:{line_number} [line:{line_number}]\n'
-                f'commentary: No getters or setters {PrincipleLink.NO_GETTERS_AND_SETTERS}\n',
-            ).to_stdout()
-            self.violation = True
+    def no_readers_parsers_or_controllers_or_sorters_and_so_on(self) -> Report:
+        principle = NoReadersParsersOrControllersOrSortersAndSoOn(
+            files=self.files,
+            output_channel=self.output_channel,
+        )
+        return principle.check_rule()
 
-    def no_mutable_objects(self, line_numbers):
-        for line_number in line_numbers:
-            Report(
-                text=f'{self.file_object.path_to_file}:{line_number} [line:{line_number}]\n'
-                f'commentary: No mutable types {PrincipleLink.NO_MUTABLE_OBJECTS}\n',
-            ).to_stdout()
-            self.violation = True
+    def no_static_methods_and_not_even_private_ones(self) -> Report:
+        principle = NoStaticMethodsAndNotEvenPrivateOnes(
+            files=self.files,
+            output_channel=self.output_channel,
+        )
+        return principle.check_rule()
 
-    def no_readers_parsers_or_controllers_or_sorters_and_so_on(self, line_number):
-        if self.class_meta.name.endswith('er') or \
-                self.class_meta.name.endswith('or') or \
-                self.class_meta.name.endswith('ers') or \
-                self.class_meta.name.endswith('ors'):
-            Report(
-                text=f'{self.file_object.path_to_file}:{line_number} [line:{line_number}]\n'
-                f"commentary: No 'er'/'ers' and etc endings {PrincipleLink.NO_ENDINGS}\n",
-            ).to_stdout()
-            self.violation = True
-
-    def no_static_methods_and_not_even_private_ones(self, line_number):
-        if self.static_decorator:
-            Report(
-                text=f'{self.file_object.path_to_file}:{line_number} [line:{line_number}]\n'
-                f'commentary: No static methods or even private ones {PrincipleLink.NO_STATIC_METHODS}\n',
-            ).to_stdout()
-            self.violation = True
-
-    def no_instanceof_or_type_casting_or_reflection(self, line_numbers):
-        for line_number in line_numbers:
-            Report(
-                text=f'{self.file_object.path_to_file}:{line_number} [line:{line_number}]\n'
-                f'commentary: No isinstance or reflection {PrincipleLink.NO_REFLECTION}\n',
-            ).to_stdout()
-            self.violation = True
+    def no_instanceof_or_type_casting_or_reflection(self) -> Report:
+        principle = NoInstanceOfOrTypeCastingOrReflection(
+            files=self.files,
+            output_channel=self.output_channel,
+        )
+        return principle.check_rule()
 
     def no_public_methods_without_a_contract_interface(self):
         pass
 
-    def no_statements_in_test_methods_except_assert(self, line_numbers):
-        for line_number in line_numbers:
-            Report(
-                text=f'{self.file_object.path_to_file}:{line_number} [line:{line_number}]\n'
-                f'commentary: No statements in test methods except assert {PrincipleLink.NO_STATEMENTS_AT_TEST_METHODS_EXCEPT_ASSERT}\n',
-            ).to_stdout()
-            self.violation = True
+    def no_statements_in_test_methods_except_assert(self) -> Report:
+        principle = NoStatementsInTestMethodsExceptAssert(
+            files=self.files,
+            output_channel=self.output_channel,
+        )
+        return principle.check_rule()
 
     def no_orm(self):
         pass
 
-    def no_inheritance(self, line_number):
-        if self.class_meta.inherited():
-            Report(
-                text=f'{self.file_object.path_to_file}:{line_number} [line:{line_number}]\n'
-                f'commentary: No inheritance {PrincipleLink.NO_INHERITANCE}\n',
-            ).to_stdout()
-            self.violation = True
+    def no_inheritance(self) -> Report:
+        principle = NoInheritance(
+            files=self.files,
+            output_channel=self.output_channel,
+        )
+        return principle.check_rule()
