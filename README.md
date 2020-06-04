@@ -213,5 +213,8 @@ Then, after keyword you should shortly describe your changes:
 
 ### Pull request naming conventions
 
-Every pull request should start with keyword pr and issue number:
-`pr-23`
+Every pull request to dev should start with keyword `pr-dev` and issue number:
+`pr-dev: 123`
+
+Every pull request to master should start with keyword `pr` and issue number:
+`pr: 123`
