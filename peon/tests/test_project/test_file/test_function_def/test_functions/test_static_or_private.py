@@ -1,7 +1,7 @@
 import _ast
 import pytest
 
-from peon.src.project.file.function_def.function import Function
+from peon.src.project.file.function_def.function import FunctionLint
 
 
 class StaticOrPrivateFixture:
@@ -20,61 +20,61 @@ class StaticOrPrivateFixture:
 
 
 def test_function_definition_is_assign():
-    assert Function(
+    assert FunctionLint(
         definition=StaticOrPrivateFixture.definition_is_assign,
     ).static_or_private() is False
 
 
 def test_function_definition_is_pass():
-    assert Function(
+    assert FunctionLint(
         definition=StaticOrPrivateFixture.definition_is_pass,
     ).static_or_private() is False
 
 
 def test_function_definition_is_expr():
-    assert Function(
+    assert FunctionLint(
         definition=StaticOrPrivateFixture.definition_is_expr,
     ).static_or_private() is False
 
 
 def test_empty_decorator_list_and_name():
     with pytest.raises(AttributeError):
-        assert Function(
+        assert FunctionLint(
             definition=StaticOrPrivateFixture.empty_decorator_list_and_name,
         ).static_or_private()
 
 
 def test_empty_decorator_list():
-    assert Function(
+    assert FunctionLint(
         definition=StaticOrPrivateFixture.empty_decorator_list,
     ).static_or_private() is False
 
 
 def test_method_is_private():
-    assert Function(
+    assert FunctionLint(
         definition=StaticOrPrivateFixture.is_private,
     ).static_or_private() is True
 
 
 def test_method_is_protected():
-    assert Function(
+    assert FunctionLint(
         definition=StaticOrPrivateFixture.is_protected,
     ).static_or_private() is True
 
 
 def test_method_is_magic():
-    assert Function(
+    assert FunctionLint(
         definition=StaticOrPrivateFixture.is_magic,
     ).static_or_private() is False
 
 
 def test_method_decorated():
-    assert Function(
+    assert FunctionLint(
         definition=StaticOrPrivateFixture.decorated,
     ).static_or_private() is False
 
 
 def test_method_is_static():
-    assert Function(
+    assert FunctionLint(
         definition=StaticOrPrivateFixture.is_static,
     ).static_or_private() is True

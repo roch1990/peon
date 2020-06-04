@@ -1,6 +1,6 @@
 import _ast
 
-from peon.src.project.file.function_def.function import Function
+from peon.src.project.file.function_def.function import FunctionLint
 
 
 class ConstructorNonAttribsValueLineNumberFixture:
@@ -17,36 +17,36 @@ class ConstructorNonAttribsValueLineNumberFixture:
 
 
 def test_definitions_is_none():
-    assert Function(
+    assert FunctionLint(
         definition=ConstructorNonAttribsValueLineNumberFixture.definition_is_none,
     ).constructor_non_attribs_value_line_number() == ()
 
 
 def test_definitions_is_not_a_function():
-    assert Function(
+    assert FunctionLint(
         definition=ConstructorNonAttribsValueLineNumberFixture.definition__is_not_a_function,
     ).constructor_non_attribs_value_line_number() == ()
 
 
 def test_definitions_is_not_a_constructor():
-    assert Function(
+    assert FunctionLint(
         definition=ConstructorNonAttribsValueLineNumberFixture.definitions_is_not_a_constructor,
     ).constructor_non_attribs_value_line_number() == ()
 
 
 def test_definitions_consist_of_assign_with_attribute():
-    assert Function(
+    assert FunctionLint(
         definition=ConstructorNonAttribsValueLineNumberFixture.definitions_consist_of_assign_with_attribute,
     ).constructor_non_attribs_value_line_number() == ()
 
 
 def test_definitions_consist_of_assign_without_attribute():
-    assert Function(
+    assert FunctionLint(
         definition=ConstructorNonAttribsValueLineNumberFixture.definitions_consist_of_assign_without_attribute,
     ).constructor_non_attribs_value_line_number() == (2,)
 
 
 def test_definitions_consist_of_any_but_not_a_assign():
-    assert Function(
+    assert FunctionLint(
         definition=ConstructorNonAttribsValueLineNumberFixture.definitions_consist_of_any_but_not_a_assign,
     ).constructor_non_attribs_value_line_number() == (3,)

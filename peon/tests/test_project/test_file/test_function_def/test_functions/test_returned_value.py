@@ -1,7 +1,7 @@
 import _ast
 
 from peon.src.project.file.function_def.expression.returned_expr import ReturnedExpression
-from peon.src.project.file.function_def.function import Function, FunctionParseResult
+from peon.src.project.file.function_def.function import FunctionLint, FunctionParseResult
 
 
 class ReturnedValueFixture:
@@ -20,11 +20,11 @@ class ReturnedValueFixture:
 
 class ResultReturnValueFixture:
     none = FunctionParseResult(
-        return_not_none=bool(Function.EMPTY_RETURNED_VALUE),
+        return_not_none=bool(FunctionLint.EMPTY_RETURNED_VALUE),
         line_number=-1,
     ).__dict__
     wrong = FunctionParseResult(
-        return_not_none=bool(Function.EMPTY_RETURNED_VALUE),
+        return_not_none=bool(FunctionLint.EMPTY_RETURNED_VALUE),
         line_number=1,
     ).__dict__
     success = FunctionParseResult(
@@ -34,42 +34,42 @@ class ResultReturnValueFixture:
 
 
 def test_node_is_none():
-    assert Function(
+    assert FunctionLint(
         definition=ReturnedValueFixture.node_is_none,
     ).returned_value().__dict__ == ResultReturnValueFixture.none
 
 
 def test_assign_expression_as_input():
-    assert Function(
+    assert FunctionLint(
         definition=ReturnedValueFixture.assign_expression_as_input,
     ).returned_value().__dict__ == ResultReturnValueFixture.wrong
 
 
 def test_pass_expression_as_input():
-    assert Function(
+    assert FunctionLint(
         definition=ReturnedValueFixture.pass_expression_as_input,
     ).returned_value().__dict__ == ResultReturnValueFixture.wrong
 
 
 def test_plain_expression_as_input():
-    assert Function(
+    assert FunctionLint(
         definition=ReturnedValueFixture.plain_expression_as_input,
     ).returned_value().__dict__ == ResultReturnValueFixture.wrong
 
 
 def test_function_body_is_empty():
-    assert Function(
+    assert FunctionLint(
         definition=ReturnedValueFixture.function_body_is_empty,
     ).returned_value().__dict__ == ResultReturnValueFixture.wrong
 
 
 def test_function_body_without_return_expression():
-    assert Function(
+    assert FunctionLint(
         definition=ReturnedValueFixture.function_body_without_return_expression,
     ).returned_value().__dict__ == ResultReturnValueFixture.wrong
 
 
 def test_function_body_with_return_expression():
-    assert Function(
+    assert FunctionLint(
         definition=ReturnedValueFixture.function_body_with_return_expression,
     ).returned_value().__dict__ == ResultReturnValueFixture.success

@@ -1,5 +1,5 @@
 import _ast
-from peon.src.project.file.function_def.function import Function
+from peon.src.project.file.function_def.function import FunctionLint
 
 from peon.src.project.file.class_def.classes import Class
 
@@ -53,7 +53,7 @@ class ConstructorFixture:
 
 
 def test_constructor_class_constructor_valid():
-    assert isinstance(Class(ConstructorFixture.constructor_without_params).constructor(), Function)
+    assert isinstance(Class(ConstructorFixture.constructor_without_params).constructor(), FunctionLint)
 
 
 def test_constructor_empty_class():
@@ -78,8 +78,8 @@ def test_method_names_empty_class():
 
 def test_converted_methods_constructor_with_additional_method():
     assert len(Class(ConstructorFixture.class_with_constructor_and_additional_method).converted_methods()) == 2
-    assert isinstance(Class(ConstructorFixture.class_with_constructor_and_additional_method).converted_methods()[0], Function)
-    assert isinstance(Class(ConstructorFixture.class_with_constructor_and_additional_method).converted_methods()[1], Function)
+    assert isinstance(Class(ConstructorFixture.class_with_constructor_and_additional_method).converted_methods()[0], FunctionLint)
+    assert isinstance(Class(ConstructorFixture.class_with_constructor_and_additional_method).converted_methods()[1], FunctionLint)
 
 
 def test_converted_methods_empty_class():
