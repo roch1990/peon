@@ -1,3 +1,6 @@
+[![EO principles respected here](https://www.elegantobjects.org/badge.svg)](https://www.elegantobjects.org)
+[![We recommend IntelliJ IDEA](https://www.elegantobjects.org/intellij-idea.svg)](https://www.jetbrains.com/idea/)
+
 [![Build Status](https://travis-ci.org/roch1990/peon.svg?branch=master)](https://travis-ci.org/roch1990/peon)
 [![codecov](https://codecov.io/gh/roch1990/peon/branch/master/graph/badge.svg)](https://codecov.io/gh/roch1990/peon)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=roch1990_peon&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=roch1990_peon)
