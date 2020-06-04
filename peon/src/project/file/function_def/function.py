@@ -17,7 +17,7 @@ class FunctionParseResult:
         self.line_number = line_number
 
 
-class Function:
+class FunctionLint:
     """
     Class for handling in-code inspected methods definitions
     """
@@ -42,26 +42,26 @@ class Function:
         # if function does not has body
         if not node:
             return FunctionParseResult(
-                return_not_none=bool(Function.EMPTY_RETURNED_VALUE),
+                return_not_none=bool(FunctionLint.EMPTY_RETURNED_VALUE),
                 line_number=-1,
             )
 
         # skip plain assignment expressions
         if isinstance(node, _ast.Assign):
             return FunctionParseResult(
-                return_not_none=bool(Function.EMPTY_RETURNED_VALUE),
+                return_not_none=bool(FunctionLint.EMPTY_RETURNED_VALUE),
                 line_number=node.lineno,
             )
         # skip plain pass expressions
         elif isinstance(node, _ast.Pass):
             return FunctionParseResult(
-                return_not_none=bool(Function.EMPTY_RETURNED_VALUE),
+                return_not_none=bool(FunctionLint.EMPTY_RETURNED_VALUE),
                 line_number=node.lineno,
             )
         # skip for any other plain expressions
         elif isinstance(node, _ast.Expr):
             return FunctionParseResult(
-                return_not_none=bool(Function.EMPTY_RETURNED_VALUE),
+                return_not_none=bool(FunctionLint.EMPTY_RETURNED_VALUE),
                 line_number=node.lineno,
             )
         # iterate over function body
@@ -74,7 +74,7 @@ class Function:
                 )
         # in any other case - return empty
         return FunctionParseResult(
-            return_not_none=bool(Function.EMPTY_RETURNED_VALUE),
+            return_not_none=bool(FunctionLint.EMPTY_RETURNED_VALUE),
             line_number=node.lineno,
         )
 

@@ -1,7 +1,7 @@
 import _ast
 from typing import Optional, Tuple
 
-from peon.src.project.file.function_def.function import Function
+from peon.src.project.file.function_def.function import FunctionLint
 
 
 class Class:
@@ -19,7 +19,7 @@ class Class:
         self.functions = self.definition.body
         self.base_classes = definition.bases
 
-    def constructor(self) -> Optional[Function]:
+    def constructor(self) -> Optional[FunctionLint]:
         """
         Check func definition for 'constructor' by name
         :return: bool
@@ -30,7 +30,7 @@ class Class:
             if isinstance(func, _ast.FunctionDef):
                 # TODO: change None value to some other
                 # return  that function if it's constructor else None
-                return Function(func) if func.name == '__init__' else None
+                return FunctionLint(func) if func.name == '__init__' else None
         return None
 
     def method_names(self) -> Tuple[str]:
@@ -49,7 +49,7 @@ class Class:
         # dont forget to convert list to immutable object
         return tuple(names)
 
-    def converted_methods(self) -> Tuple[Function]:
+    def converted_methods(self) -> Tuple[FunctionLint]:
         """
         Return all class methods as Function objects
         :return: tuple of class methods
@@ -60,7 +60,7 @@ class Class:
             # check, that the aren't constants or assignment
             if isinstance(func, _ast.FunctionDef):
                 # convert function from ast function object to local Function object
-                converted_methods.append(Function(func))
+                converted_methods.append(FunctionLint(func))
         # dont forget to convert list to immutable object
         return tuple(converted_methods)
 
