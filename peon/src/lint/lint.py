@@ -37,9 +37,11 @@ class Lint:
         reports.append(principles.no_statements_in_test_methods_except_assert())
         reports.append(principles.no_inheritance())
 
-        report_done = False
+        code_with_vulnerabilities = False
         if reports:
             for report in reports:
-                report_done = report_done or report.send()
-        if report_done:
+                report_done = report.send()
+                code_with_vulnerabilities = code_with_vulnerabilities or report_done
+
+        if code_with_vulnerabilities:
             sys.exit(1)
