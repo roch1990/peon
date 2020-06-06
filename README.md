@@ -22,6 +22,7 @@
 - [Introduction](#introduction)
     - [What is that](#what-is-that)
     - [What eo principles i can check](#what-eo-principles-i-can-check)
+    - [Python versions compability](#python-versions-compability)
 - [Use-cases](#use-cases)
     - [Shell](#from-shell)
     - [Pre-commit hook](#add-linter-to-pre-commit-hooks)
@@ -66,6 +67,14 @@
  :heavy_minus_sign: - not done yet
 
  :x: - will never be done, i think
+
+## Python versions compability
+
+ | Version| Yes/No| Why|
+ | ------------- |:------------------:|:------------------:|
+ | 3.6    | :heavy_check_mark:    |     |
+ | 3.7    | :heavy_check_mark:    |     |
+ | 3.8    | :heavy_minus_sign:    | Compability of ast(Abstract Syntax Trees) package is broken between 3.7 and 3.8 python versions    |
 
 # Use-cases
 
@@ -179,7 +188,13 @@ You can start local test:
 make tests
 ```
 
-this instruction starts both tests - unit and mutual.
+this instruction starts - unit, mutual and security tests.
+
+Yuo can test pre-commit integration:
+
+```bash
+make local-run
+```
 
 Show results of mutual tests:
 

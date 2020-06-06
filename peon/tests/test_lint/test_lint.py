@@ -6,8 +6,7 @@ from peon.src.lint.report.report_channels import ReportChannels
 
 
 def test_sucess():
-    with pytest.raises(SystemExit):
-        assert Lint(TestProjectTree().project_tree.inspect(), output_channel=ReportChannels.stdout).project() is None
+    assert Lint(TestProjectTree().project_tree.inspect(), output_channel=ReportChannels.stdout).project() is None
 
 
 def test_none_path():
@@ -16,5 +15,4 @@ def test_none_path():
 
 
 def test_empty_project():
-    with pytest.raises(SystemExit):
-        assert Lint([], output_channel=ReportChannels.stdout).project() is None
+    assert Lint([], output_channel=ReportChannels.stdout).project() is None
