@@ -9,16 +9,16 @@ def test_constructor():
 
 
 def test_text_is_none():
-    assert Report(text=None, channel=ReportChannels.stdout).to_stdout() is None
+    assert Report(text=None, channel=ReportChannels.stdout).to_stdout() is False
 
 
 def test_text_is_empty():
-    assert Report(text='', channel=ReportChannels.stdout).to_stdout() is None
+    assert Report(text='', channel=ReportChannels.stdout).to_stdout() is False
 
 
 def test_text_is_filled():
-    assert Report(text='test message', channel=ReportChannels.stdout).to_stdout() is None
+    assert Report(text='test message', channel=ReportChannels.stdout).to_stdout() is True
 
 
 def test_text_has_wrong_type():
-    assert Report(text=[], channel=ReportChannels.stdout).to_stdout() is None
+    assert Report(text=[], channel=ReportChannels.stdout).to_stdout() is False
