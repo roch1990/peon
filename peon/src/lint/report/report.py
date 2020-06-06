@@ -13,9 +13,9 @@ class Report:
 
     def send(self):
         if self.channel == ReportChannels.stdout:
-            self.to_stdout()
+            return self.to_stdout()
         elif self.channel == ReportChannels.file:
-            self.to_file()
+            return self.to_file()
 
     def to_stdout(self) -> bool:
         if not self.text:

@@ -31,4 +31,3 @@ class CommandLine:
 
             lint_result = Lint(files=tuple(files), output_channel='stdout')
             lint_result.project()
-        sys.exit(0)
