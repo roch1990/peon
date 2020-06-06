@@ -18,7 +18,9 @@ class Report:
             self.to_file()
 
     def to_stdout(self):
-        print(self.text, file=sys.stderr)
+        if not self.text:
+            return
+        print(self.text, file=sys.stdout)
 
     def to_file(self):
         if not self.text:
