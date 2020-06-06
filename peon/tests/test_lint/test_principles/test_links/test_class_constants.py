@@ -1,4 +1,4 @@
-from src.lint.links.links import PrincipleLink
+from peon.src.lint.links.links import PrincipleLink
 
 
 def test_no_null():
