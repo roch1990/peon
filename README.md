@@ -22,6 +22,7 @@
 - [Introduction](#introduction)
     - [What is that](#what-is-that)
     - [What eo principles i can check](#what-eo-principles-i-can-check)
+    - [Python versions compability](#python-versions-compability)
 - [Use-cases](#use-cases)
     - [Shell](#from-shell)
     - [Pre-commit hook](#add-linter-to-pre-commit-hooks)
@@ -187,7 +188,13 @@ You can start local test:
 make tests
 ```
 
-this instruction starts both tests - unit and mutual.
+this instruction starts - unit, mutual and security tests.
+
+Yuo can test pre-commit integration:
+
+```bash
+make local-run
+```
 
 Show results of mutual tests:
 
