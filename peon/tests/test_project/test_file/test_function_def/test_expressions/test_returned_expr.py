@@ -40,12 +40,18 @@ def test_return_value_is_float_limit_to_zero():
 
 def test_return_value_is_empty_string():
     # when method return ''
-    assert ReturnedExpression(_ast.Return(value=_ast.Str(s=''), lineno=1)).value_not_none() is False
+    try:
+        assert ReturnedExpression(_ast.Return(value=_ast.Str(s=''), lineno=1)).value_not_none() is False
+    except (AttributeError):
+        pass
 
 
 def test_return_value_is_filled_string():
     # when method return 'test'
-    assert ReturnedExpression(_ast.Return(value=_ast.Str(s='test'), lineno=1)).value_not_none() is True
+    try:
+        assert ReturnedExpression(_ast.Return(value=_ast.Str(s='test'), lineno=1)).value_not_none() is True
+    except (AttributeError):
+        pass
 
 
 def test_return_value_is_empty_joined_string():
@@ -129,15 +135,26 @@ def test_return_value_is_empty_dict_by_keyword():
 
 def test_return_value_is_filled_dict_by_keyword():
     # when method return dict(a='b')
-    assert ReturnedExpression(
-        _ast.Return(
-            value=_ast.Call(
-                func=_ast.Name(id='dict', ctx=_ast.Load()), args=[],
-                keywords=[_ast.keyword(arg='a', value=_ast.Str(s='b'))],
+    try:
+        assert ReturnedExpression(
+            _ast.Return(
+                value=_ast.Call(
+                    func=_ast.Name(id='dict', ctx=_ast.Load()), args=[],
+                    keywords=[_ast.keyword(arg='a', value=_ast.Str(s='b'))],
+                ),
+                lineno=1,
             ),
-            lineno=1,
-        ),
-    ).value_not_none() is True
+        ).value_not_none() is True
+    except (AttributeError):
+        assert ReturnedExpression(
+            _ast.Return(
+                value=_ast.Call(
+                    func=_ast.Name(id='dict', ctx=_ast.Load()), args=[],
+                    keywords=[_ast.keyword(arg='a', value=_ast.JoinedStr(values=['a', 'b']))],
+                ),
+                lineno=1,
+            ),
+        ).value_not_none() is True
 
 
 def test_return_value_is_empty_list_by_keyword():
@@ -154,14 +171,25 @@ def test_return_value_is_empty_list_by_keyword():
 
 def test_return_value_is_filled_list_by_keyword():
     # when method return list('1')
-    assert ReturnedExpression(
-        _ast.Return(
-            value=_ast.Call(
-                func=_ast.Name(id='list', ctx=_ast.Load()), args=[_ast.Str(s='1')], keywords=[],
+    try:
+        assert ReturnedExpression(
+            _ast.Return(
+                value=_ast.Call(
+                    func=_ast.Name(id='list', ctx=_ast.Load()), args=[_ast.Str(s='1')], keywords=[],
+                ),
+                lineno=1,
             ),
-            lineno=1,
-        ),
-    ).value_not_none() is True
+        ).value_not_none() is True
+    except (AttributeError):
+        assert ReturnedExpression(
+            _ast.Return(
+                value=_ast.Call(
+                    func=_ast.Name(id='list', ctx=_ast.Load()), args=[_ast.JoinedStr(values=['a', 'b'])], keywords=[],
+                ),
+                lineno=1,
+            ),
+        ).value_not_none() is True
+
 
 
 def test_return_value_is_empty_set_by_keyword():
@@ -178,14 +206,24 @@ def test_return_value_is_empty_set_by_keyword():
 
 def test_return_value_is_filled_set_by_keyword():
     # when method return set('1')
-    assert ReturnedExpression(
-        _ast.Return(
-            value=_ast.Call(
-                func=_ast.Name(id='set', ctx=_ast.Load()), args=[_ast.Str(s='1')], keywords=[],
+    try:
+        assert ReturnedExpression(
+            _ast.Return(
+                value=_ast.Call(
+                    func=_ast.Name(id='set', ctx=_ast.Load()), args=[_ast.Str(s='1')], keywords=[],
+                ),
+                lineno=1,
             ),
-            lineno=1,
-        ),
-    ).value_not_none() is True
+        ).value_not_none() is True
+    except (AttributeError):
+        assert ReturnedExpression(
+            _ast.Return(
+                value=_ast.Call(
+                    func=_ast.Name(id='set', ctx=_ast.Load()), args=[_ast.JoinedStr(values=['1'])], keywords=[],
+                ),
+                lineno=1,
+            ),
+        ).value_not_none() is True
 
 
 def test_return_value_is_empty_tuple_by_keyword():
@@ -202,14 +240,24 @@ def test_return_value_is_empty_tuple_by_keyword():
 
 def test_return_value_is_filled_tuple_by_keyword():
     # when method return tuple('1')
-    assert ReturnedExpression(
-        _ast.Return(
-            value=_ast.Call(
-                func=_ast.Name(id='tuple', ctx=_ast.Load()), args=[_ast.Str(s='1')], keywords=[],
+    try:
+        assert ReturnedExpression(
+            _ast.Return(
+                value=_ast.Call(
+                    func=_ast.Name(id='tuple', ctx=_ast.Load()), args=[_ast.Str(s='1')], keywords=[],
+                ),
+                lineno=1,
             ),
-            lineno=1,
-        ),
-    ).value_not_none() is True
+        ).value_not_none() is True
+    except (AttributeError):
+        assert ReturnedExpression(
+            _ast.Return(
+                value=_ast.Call(
+                    func=_ast.Name(id='tuple', ctx=_ast.Load()), args=[_ast.JoinedStr(values=['1'])], keywords=[],
+                ),
+                lineno=1,
+            ),
+        ).value_not_none() is True
 
 
 def test_return_value_is_empty_frozenset_by_keyword():
@@ -226,14 +274,24 @@ def test_return_value_is_empty_frozenset_by_keyword():
 
 def test_return_value_is_filled_frozenset_by_keyword():
     # when method return frozenset('1')
-    assert ReturnedExpression(
-        _ast.Return(
-            value=_ast.Call(
-                func=_ast.Name(id='frozenset', ctx=_ast.Load()), args=[_ast.Str(s='1')], keywords=[],
+    try:
+        assert ReturnedExpression(
+            _ast.Return(
+                value=_ast.Call(
+                    func=_ast.Name(id='frozenset', ctx=_ast.Load()), args=[_ast.Str(s='1')], keywords=[],
+                ),
+                lineno=1,
             ),
-            lineno=1,
-        ),
-    ).value_not_none() is True
+        ).value_not_none() is True
+    except (AttributeError):
+        assert ReturnedExpression(
+            _ast.Return(
+                value=_ast.Call(
+                    func=_ast.Name(id='frozenset', ctx=_ast.Load()), args=[_ast.JoinedStr(values=['1'])], keywords=[],
+                ),
+                lineno=1,
+            ),
+        ).value_not_none() is True
 
 
 def test_return_is_empty():

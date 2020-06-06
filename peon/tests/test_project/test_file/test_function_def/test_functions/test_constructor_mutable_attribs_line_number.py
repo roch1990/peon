@@ -7,13 +7,20 @@ class ConstructorMutableAttribsLineNumberFixture:
     definition_is_none = None
     definition_is_not_a_function = _ast.Pass
     constructor_with_empty_body = _ast.FunctionDef(name='__init__', body=[])
-    constructor_with_immutable = _ast.FunctionDef(
-        name='__init__', body=[
-            _ast.Assign(lineno=1, value=_ast.Tuple(elts=[1, 2, 3])),
-            _ast.Assign(lineno=2, value=_ast.Str(s='a')),
-            _ast.Assign(lineno=3, value=_ast.JoinedStr(values=None)),
-        ],
-    )
+    try:
+        constructor_with_immutable = _ast.FunctionDef(
+            name='__init__', body=[
+                _ast.Assign(lineno=1, value=_ast.Tuple(elts=[1, 2, 3])),
+                _ast.Assign(lineno=2, value=_ast.Str(s='a')),
+            ],
+        )
+    except (AttributeError):
+        constructor_with_immutable= _ast.FunctionDef(
+            name='__init__', body=[
+                _ast.Assign(lineno=1, value=_ast.Tuple(elts=[1, 2, 3])),
+                _ast.Assign(lineno=3, value=_ast.JoinedStr(values=None)),
+            ],
+        )
     constructor_with_mutable = _ast.FunctionDef(
         name='__init__', body=[
             _ast.Assign(lineno=1, value=_ast.List(elts=[1, 2, 3])),
