@@ -1,3 +1,4 @@
+import os
 import sys
 
 from peon.src.lint.report.report_channels import ReportChannels
@@ -26,6 +27,16 @@ class Report:
     def to_file(self) -> bool:
         if not self.text:
             return False
-        with open(ReportChannels.file, 'w') as result:
+        with open(ReportChannels.file, 'a') as result:
             result.write(self.text)
+        return True
+
+    def clean(self) -> bool:
+        if self.channel == ReportChannels.stdout:
+            return True
+        try:
+            os.remove(ReportChannels.file)
+        except (OSError, FileNotFoundError, IOError):
+            print(f'Something went wrong with file {ReportChannels.file} cleanup process.')
+            return False
         return True
