@@ -1,5 +1,7 @@
 import sys
 
+from peon.src.lint.report.report import Report
+
 from peon.src.lint.principles.principles import Principle
 
 
@@ -16,9 +18,11 @@ class Lint:
             self,
             files: tuple,
             output_channel: str,
+            result_independence: bool,
     ):
         self.files = files
         self.output_channel = output_channel
+        self.result_independence = result_independence
 
     def project(self):
         reports = []
@@ -27,6 +31,9 @@ class Lint:
             files=self.files,
             output_channel=self.output_channel,
         )
+        # cleanup report file
+        Report(text='', channel=self.output_channel).clean()
+
         reports.append(principles.no_null())
         reports.append(principles.no_code_in_constructors())
         reports.append(principles.no_getters_and_setters())
@@ -43,5 +50,7 @@ class Lint:
                 report_done = report.send()
                 code_with_vulnerabilities = code_with_vulnerabilities or report_done
 
+        # skip result exit_code if flag provided
+        exit_code = 0 if self.result_independence else 1
         if code_with_vulnerabilities:
-            sys.exit(1)
+            sys.exit(exit_code)
