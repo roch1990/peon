@@ -74,7 +74,8 @@
  | ------------- |:------------------:|:------------------:|
  | 3.6    | :heavy_check_mark:    |     |
  | 3.7    | :heavy_check_mark:    |     |
- | 3.8    | :heavy_minus_sign:    | Compability of ast(Abstract Syntax Trees) package is broken between 3.7 and 3.8 python versions    |
+ | 3.8    | :heavy_check_mark:    |     |
+ | 3.9    | :heavy_check_mark:    |     |
 
 # Use-cases
 

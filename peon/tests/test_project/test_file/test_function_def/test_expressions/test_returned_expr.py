@@ -1,8 +1,12 @@
 import _ast
+import sys
+
+import pytest
 
 from peon.src.project.file.function_def.expression.returned_expr import ReturnedExpression
 
 
+@pytest.mark.skipif(sys.version_info > (3, 7), reason='test marked as for older pythen version (<3.8)')
 def test_return_value_is_func():
     assert ReturnedExpression(
         _ast.Return(
@@ -16,21 +20,25 @@ def test_return_value_is_func():
     ).value_not_none() is True
 
 
+@pytest.mark.skipif(sys.version_info > (3, 7), reason='test marked as for older pythen version (<3.8)')
 def test_return_value_is_int_one():
     # when method return 1
     assert ReturnedExpression(_ast.Return(value=_ast.Num(n=1), lineno=1)).value_not_none() is True
 
 
+@pytest.mark.skipif(sys.version_info > (3, 7), reason='test marked as for older pythen version (<3.8)')
 def test_return_value_is_int_zero():
     # when method return 0
     assert ReturnedExpression(_ast.Return(value=_ast.Num(n=0), lineno=1)).value_not_none() is True
 
 
+@pytest.mark.skipif(sys.version_info > (3, 7), reason='test marked as for older pythen version (<3.8)')
 def test_return_value_is_float_zero():
     # when method return 0.0
     assert ReturnedExpression(_ast.Return(value=_ast.Num(n=0.0), lineno=1)).value_not_none() is True
 
 
+@pytest.mark.skipif(sys.version_info > (3, 7), reason='test marked as for older pythen version (<3.8)')
 def test_return_value_is_float_limit_to_zero():
     # when method return 0.0000000000000000000000001
     assert ReturnedExpression(
@@ -38,6 +46,7 @@ def test_return_value_is_float_limit_to_zero():
     ).value_not_none() is True
 
 
+@pytest.mark.skipif(sys.version_info > (3, 7), reason='test marked as for older pythen version (<3.8)')
 def test_return_value_is_empty_string():
     # when method return ''
     try:
@@ -46,6 +55,7 @@ def test_return_value_is_empty_string():
         pass
 
 
+@pytest.mark.skipif(sys.version_info > (3, 7), reason='test marked as for older pythen version (<3.8)')
 def test_return_value_is_filled_string():
     # when method return 'test'
     try:
@@ -54,21 +64,25 @@ def test_return_value_is_filled_string():
         pass
 
 
+@pytest.mark.skipif(sys.version_info > (3, 7), reason='test marked as for older pythen version (<3.8)')
 def test_return_value_is_empty_joined_string():
     # when method return ''
     assert ReturnedExpression(_ast.Return(value=_ast.JoinedStr(values=[]), lineno=1)).value_not_none() is False
 
 
+@pytest.mark.skipif(sys.version_info > (3, 7), reason='test marked as for older pythen version (<3.8)')
 def test_return_value_is_filled_joined_string():
     # when method return '{}{}{}'.format('a', 'b', 'c')
     assert ReturnedExpression(_ast.Return(value=_ast.JoinedStr(values=['a', 'b', 'c']), lineno=1)).value_not_none() is True
 
 
+@pytest.mark.skipif(sys.version_info > (3, 7), reason='test marked as for older pythen version (<3.8)')
 def test_return_value_is_none():
     # when method return None
     assert ReturnedExpression(_ast.Return(value=_ast.NameConstant(value=None), lineno=1)).value_not_none() is False
 
 
+@pytest.mark.skipif(sys.version_info > (3, 7), reason='test marked as for older pythen version (<3.8)')
 def test_return_value_is_class_constant():
     # when method return SomeClass.CONSTANT
     assert ReturnedExpression(
@@ -79,6 +93,7 @@ def test_return_value_is_class_constant():
     ).value_not_none() is True
 
 
+@pytest.mark.skipif(sys.version_info > (3, 7), reason='test marked as for older pythen version (<3.8)')
 def test_return_value_is_empty_list():
     # when method return []
     assert ReturnedExpression(
@@ -86,6 +101,7 @@ def test_return_value_is_empty_list():
     ).value_not_none() is False
 
 
+@pytest.mark.skipif(sys.version_info > (3, 7), reason='test marked as for older pythen version (<3.8)')
 def test_return_value_is_filled_list():
     # when method return ['1']
     assert ReturnedExpression(
@@ -93,6 +109,7 @@ def test_return_value_is_filled_list():
     ).value_not_none() is True
 
 
+@pytest.mark.skipif(sys.version_info > (3, 7), reason='test marked as for older pythen version (<3.8)')
 def test_return_value_is_empty_tuple():
     # when method return ()
     assert ReturnedExpression(
@@ -100,6 +117,7 @@ def test_return_value_is_empty_tuple():
     ).value_not_none() is False
 
 
+@pytest.mark.skipif(sys.version_info > (3, 7), reason='test marked as for older pythen version (<3.8)')
 def test_return_value_is_filled_tuple():
     # when method return ('1')
     assert ReturnedExpression(
@@ -107,6 +125,7 @@ def test_return_value_is_filled_tuple():
     ).value_not_none() is True
 
 
+@pytest.mark.skipif(sys.version_info > (3, 7), reason='test marked as for older pythen version (<3.8)')
 def test_return_value_is_empty_dict():
     # when method return {}
     assert ReturnedExpression(
@@ -114,6 +133,7 @@ def test_return_value_is_empty_dict():
     ).value_not_none() is False
 
 
+@pytest.mark.skipif(sys.version_info > (3, 7), reason='test marked as for older pythen version (<3.8)')
 def test_return_value_is_filled_dict():
     # when method return {'1': '2'}
     assert ReturnedExpression(
@@ -121,6 +141,7 @@ def test_return_value_is_filled_dict():
     ).value_not_none() is True
 
 
+@pytest.mark.skipif(sys.version_info > (3, 7), reason='test marked as for older pythen version (<3.8)')
 def test_return_value_is_empty_dict_by_keyword():
     # when method return dict()
     assert ReturnedExpression(
@@ -133,6 +154,7 @@ def test_return_value_is_empty_dict_by_keyword():
     ).value_not_none() is False
 
 
+@pytest.mark.skipif(sys.version_info > (3, 7), reason='test marked as for older pythen version (<3.8)')
 def test_return_value_is_filled_dict_by_keyword():
     # when method return dict(a='b')
     try:
@@ -157,6 +179,7 @@ def test_return_value_is_filled_dict_by_keyword():
         ).value_not_none() is True
 
 
+@pytest.mark.skipif(sys.version_info > (3, 7), reason='test marked as for older pythen version (<3.8)')
 def test_return_value_is_empty_list_by_keyword():
     # when method return list()
     assert ReturnedExpression(
@@ -169,6 +192,7 @@ def test_return_value_is_empty_list_by_keyword():
     ).value_not_none() is False
 
 
+@pytest.mark.skipif(sys.version_info > (3, 7), reason='test marked as for older pythen version (<3.8)')
 def test_return_value_is_filled_list_by_keyword():
     # when method return list('1')
     try:
@@ -191,7 +215,7 @@ def test_return_value_is_filled_list_by_keyword():
         ).value_not_none() is True
 
 
-
+@pytest.mark.skipif(sys.version_info > (3, 7), reason='test marked as for older pythen version (<3.8)')
 def test_return_value_is_empty_set_by_keyword():
     # when method return set()
     assert ReturnedExpression(
@@ -204,6 +228,7 @@ def test_return_value_is_empty_set_by_keyword():
     ).value_not_none() is False
 
 
+@pytest.mark.skipif(sys.version_info > (3, 7), reason='test marked as for older pythen version (<3.8)')
 def test_return_value_is_filled_set_by_keyword():
     # when method return set('1')
     try:
@@ -226,6 +251,7 @@ def test_return_value_is_filled_set_by_keyword():
         ).value_not_none() is True
 
 
+@pytest.mark.skipif(sys.version_info > (3, 7), reason='test marked as for older pythen version (<3.8)')
 def test_return_value_is_empty_tuple_by_keyword():
     # when method return tuple()
     assert ReturnedExpression(
@@ -238,6 +264,7 @@ def test_return_value_is_empty_tuple_by_keyword():
     ).value_not_none() is False
 
 
+@pytest.mark.skipif(sys.version_info > (3, 7), reason='test marked as for older pythen version (<3.8)')
 def test_return_value_is_filled_tuple_by_keyword():
     # when method return tuple('1')
     try:
@@ -260,6 +287,7 @@ def test_return_value_is_filled_tuple_by_keyword():
         ).value_not_none() is True
 
 
+@pytest.mark.skipif(sys.version_info > (3, 7), reason='test marked as for older pythen version (<3.8)')
 def test_return_value_is_empty_frozenset_by_keyword():
     # when method return frozenset()
     assert ReturnedExpression(
@@ -272,6 +300,7 @@ def test_return_value_is_empty_frozenset_by_keyword():
     ).value_not_none() is False
 
 
+@pytest.mark.skipif(sys.version_info > (3, 7), reason='test marked as for older pythen version (<3.8)')
 def test_return_value_is_filled_frozenset_by_keyword():
     # when method return frozenset('1')
     try:
@@ -294,6 +323,7 @@ def test_return_value_is_filled_frozenset_by_keyword():
         ).value_not_none() is True
 
 
+@pytest.mark.skipif(sys.version_info > (3, 7), reason='test marked as for older pythen version (<3.8)')
 def test_return_is_empty():
     # when method return nothing, not None, only 'return'
     assert ReturnedExpression(
