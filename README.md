@@ -42,7 +42,7 @@
  "[Elegant objects](https://www.elegantobjects.org/)" OOP architecture,
  proposed by [yegor256](https://github.com/yegor256)
 
- This repo work only for python code.
+ This repo works only for python code.
 
 ## What eo principles i can check?
 
@@ -191,7 +191,7 @@ make tests
 
 this instruction starts - unit, mutual and security tests.
 
-Yuo can test pre-commit integration:
+You can test pre-commit integration:
 
 ```bash
 make local-run
