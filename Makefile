@@ -16,7 +16,7 @@ cov-report:
 
 .PHONY: help
 help:
-	@echo "You can run this helpfull commands:"
+	@echo "You can run this helpful commands:"
 	@echo
 	@echo -e "\tmake local-run   try your changes in pre-commit environment"
 	@echo -e "\tmake tests       start tests"

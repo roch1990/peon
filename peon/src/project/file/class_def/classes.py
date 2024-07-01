@@ -26,14 +26,14 @@ class Class:
         """
         # iterate over all definitions from ast node body
         for func in self.functions:
-            # check, that the aren't constants or assignment
+            # check, that they aren't constants or assignment
             if isinstance(func, _ast.FunctionDef):
                 # TODO: change None value to some other
                 # return  that function if it's constructor else None
                 return FunctionLint(func) if func.name == '__init__' else None
         return None
 
-    def method_names(self) -> Tuple[str]:
+    def method_names(self) -> Tuple[str, ...]:
         """
         Return all class defined methods
         :return: tuple with methods names
@@ -41,7 +41,7 @@ class Class:
         names = []
         # iterate over all definitions from ast node body
         for func in self.functions:
-            # check, that the aren't constants or assignment
+            # check, that they aren't constants or assignment
             if isinstance(func, _ast.FunctionDef):
                 # append function name to list
                 method_name: str = func.name
@@ -49,7 +49,7 @@ class Class:
         # dont forget to convert list to immutable object
         return tuple(names)
 
-    def converted_methods(self) -> Tuple[FunctionLint]:
+    def converted_methods(self) -> Tuple[FunctionLint, ...]:
         """
         Return all class methods as Function objects
         :return: tuple of class methods
@@ -57,7 +57,7 @@ class Class:
         converted_methods = []
         # iterate over all definitions from ast node body
         for func in self.functions:
-            # check, that the aren't constants or assignment
+            # check, that they aren't constants or assignment
             if isinstance(func, _ast.FunctionDef):
                 # convert function from ast function object to local Function object
                 converted_methods.append(FunctionLint(func))

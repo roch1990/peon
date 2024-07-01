@@ -1,6 +1,5 @@
 import argparse
 import os
-import sys
 
 from peon.src.lint.report.report_channels import ReportChannels
 
