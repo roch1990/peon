@@ -19,14 +19,14 @@ class AbstractPrinciple:
         for file in self.files:
 
             file = File(file)
-            file_hierarhy = InternalFileStruct(file)
-            file_hierarhy.check()
+            file_hierarchy = InternalFileStruct(file)
+            file_hierarchy.check()
 
-            if not file_hierarhy.func_definitions and not file_hierarhy.class_definitions:
+            if not file_hierarchy.func_definitions and not file_hierarchy.class_definitions:
                 continue
 
-            classes = file_hierarhy.class_definitions
-            functions = file_hierarhy.func_definitions
+            classes = file_hierarchy.class_definitions
+            functions = file_hierarchy.func_definitions
 
             function_lint_result = self.lint_functions(tuple(functions))
             class_methods_lint_result = []
@@ -45,7 +45,7 @@ class AbstractPrinciple:
 
     def lint_functions(self, functions: tuple):
         """
-        Here magic happend
+        Here magic happens
         :param functions:
         :return:
         """
